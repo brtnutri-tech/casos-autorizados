@@ -1,0 +1,41 @@
+COMO FUNCIONAM AS FOTOS DE ANTES E DEPOIS
+==========================================
+
+Cada paciente fica numa pastinha numerada (01, 02, 03...).
+Dentro de cada pasta tem sempre 2 arquivos:
+
+   antes.webp    (a foto de antes)
+   depois.webp   (a foto de depois)
+
+A ordem em que aparecem na página segue o número da pasta:
+a 01 aparece primeiro, depois a 02, e assim por diante.
+
+
+O QUE VOCÊ PODE FAZER
+---------------------
+
+TROCAR uma foto:
+   Entre na pasta do paciente e substitua o arquivo antes ou depois
+   pela foto nova. Mantenha o mesmo nome (antes / depois).
+
+ADICIONAR um paciente novo:
+   Crie uma pasta nova com o próximo número (ex: 10),
+   coloque dentro as duas fotos (antes e depois).
+
+TIRAR um paciente:
+   Apague a pasta dele inteira.
+
+MUDAR A ORDEM:
+   Renomeie o número na frente das pastas
+   (quem tiver o número menor aparece primeiro).
+
+
+IMPORTANTE
+----------
+
+Depois de mexer nas fotos, me chame (o Claude) que eu religo a
+página pra ela reconhecer as mudanças. Você não precisa mexer em
+nenhum código, só nas fotos. Eu cuido do resto.
+
+Pode mandar as fotos em qualquer formato (jpg do celular, png, etc).
+Quando me chamar, eu deixo tudo no padrão certo.

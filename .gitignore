@@ -1,0 +1,18 @@
+# Material interno que NÃO deve ir pra internet (fica só no seu Mac)
+fotos/Cases/
+
+# Config local do preview (não precisa ir pro repositório)
+.claude/
+
+# Documentos internos de trabalho (nomes reais, estratégia): NUNCA publicar
+BRIEFING-pagina-casos.md
+MAPEAMENTO-FOTOS.md
+Casos-Diogo-Brito-para-revisao.docx
+*.docx
+
+# Bagunça do macOS
+.DS_Store
+Icon?
+._*
+.Spotlight-V100
+.Trashes

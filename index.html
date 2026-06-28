@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Casos autorizados | Diogo Brito Nutricionista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Cores (copiadas 1:1 do projeto original) */
+    --color-brand-green: #80A422;
+    --color-brand-green-50: #F5F7E8;
+    --color-brand-green-500: #80A422;
+    --color-brand-green-600: #6E8F1D;
+    --color-brand-green-700: #5E7A16;
+    --color-brand-green-800: #4B6211;
+
+    --color-stone-50: #F6F5F1;
+    --color-stone-100: #EDEBE4;
+    --color-stone-200: #DDDAD0;
+    --color-stone-300: #C3BFB1;
+    --color-stone-500: #78746A;
+    --color-stone-600: #55524A;
+    --color-stone-700: #3B3933;
+    --color-stone-800: #262521;
+    --color-stone-900: #14130F;
+
+    --font-display: 'Outfit', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+    --shadow-sm: 0 1px 3px rgba(20, 19, 15, 0.06), 0 1px 2px rgba(20, 19, 15, 0.04);
+    --shadow-md: 0 4px 12px rgba(20, 19, 15, 0.07), 0 2px 4px rgba(20, 19, 15, 0.04);
+    --shadow-lg: 0 12px 28px rgba(20, 19, 15, 0.09), 0 4px 8px rgba(20, 19, 15, 0.04);
+    --shadow-xl: 0 24px 48px rgba(20, 19, 15, 0.12), 0 8px 16px rgba(20, 19, 15, 0.05);
+
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: var(--font-body);
+    color: var(--color-stone-800);
+    background: var(--color-stone-50);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===================== HERO / SEÇÃO "PESSOAS REAIS" ===================== */
+  .section {
+    padding: 80px 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .container-page {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: 24px;
+  }
+  .section-head.center { text-align: center; margin-inline: auto; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-brand-green-700);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .eyebrow .line {
+    width: 24px;
+    height: 1.5px;
+    background: var(--color-brand-green);
+    border-radius: 2px;
+  }
+
+  .section-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 1.08;
+    color: var(--color-stone-900);
+    margin-bottom: 36px;
+  }
+
+  .cases-cta-wrap { display: flex; justify-content: center; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 22px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1;
+    transition: background 120ms var(--ease-standard),
+                color 120ms var(--ease-standard),
+                border-color 120ms var(--ease-standard),
+                transform 120ms var(--ease-standard);
+  }
+  .btn-outline {
+    background: #fff;
+    color: var(--color-stone-800);
+    border-color: var(--color-stone-300);
+  }
+  .btn-outline:hover { border-color: var(--color-stone-800); }
+  .btn-outline:active { transform: translateY(1px); }
+
+  .btn-green { background: var(--color-brand-green); color: #fff; }
+  .btn-green:hover { background: var(--color-brand-green-600); color: #fff; }
+  .btn-green:active { transform: translateY(1px); }
+  .btn-block { width: 100%; }
+  .btn-lg { padding: 16px 24px; font-size: 16px; }
+
+  @media (max-width: 820px) {
+    .section { padding: 64px 0; }
+    .section-head h2 { font-size: 26px; }
+  }
+  @media (max-width: 540px) {
+    .section { padding: 56px 0; }
+  }
+
+  /* ===================== MODAL ===================== */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 19, 15, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 100;
+    display: none;
+    place-items: center;
+    padding: 20px;
+    animation: modalFadeIn 200ms var(--ease-standard);
+  }
+  .modal-backdrop.open { display: grid; }
+  @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal {
+    background: #fff;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 460px;
+    padding: 36px 32px 32px;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    animation: modalIn 320ms var(--ease-out);
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px 8px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--color-stone-300);
+    background: #fff;
+    color: var(--color-stone-700);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: background 120ms var(--ease-standard),
+                color 120ms var(--ease-standard),
+                border-color 120ms var(--ease-standard);
+    z-index: 3;
+  }
+  .modal-close:hover {
+    background: var(--color-stone-50);
+    color: var(--color-stone-900);
+    border-color: var(--color-stone-500);
+  }
+
+  /* Botão "voltar" (volta da história pra lista de casos) */
+  .modal-back {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px 8px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--color-stone-300);
+    background: #fff;
+    color: var(--color-stone-700);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: background 120ms var(--ease-standard),
+                color 120ms var(--ease-standard),
+                border-color 120ms var(--ease-standard);
+    z-index: 3;
+  }
+  .modal-back:hover {
+    background: var(--color-stone-50);
+    color: var(--color-stone-900);
+    border-color: var(--color-stone-500);
+  }
+
+  .modal p {
+    margin: 0 0 24px;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--color-stone-600);
+  }
+
+  /* AvisoModal — título destacado em caixa verde */
+  .modal h3.aviso-headline {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.022em;
+    line-height: 1.12;
+    color: var(--color-brand-green-800);
+    background: var(--color-brand-green-50);
+    border-left: 4px solid var(--color-brand-green);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 0 0 20px;
+  }
+  .modal p.aviso-question {
+    margin: 4px 0 18px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-stone-800);
+  }
+  .modal-actions { display: flex; flex-direction: column; gap: 10px; }
+
+  /* ===================== LISTA DE CASOS (botões por situação de vida) ===================== */
+  .modal.lista { max-width: 600px; }
+  .lista-body {
+    max-height: calc(90vh - 90px);
+    overflow-y: auto;
+    margin: 30px -6px 0;
+    padding: 0 6px 6px;
+  }
+  .lista-head { text-align: center; margin-bottom: 22px; }
+  .lista-head h3 {
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-stone-900);
+    margin-bottom: 6px;
+  }
+  .lista-head p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-stone-600);
+  }
+
+  .lista-group { margin-bottom: 26px; }
+  .lista-group:last-child { margin-bottom: 4px; }
+  .lista-group-title {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-brand-green-700);
+    margin-bottom: 12px;
+    padding-left: 4px;
+  }
+  .dor-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .dor-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    text-align: left;
+    padding: 16px 18px;
+    border-radius: 16px;
+    border: 1px solid var(--color-stone-200);
+    background: #fff;
+    color: var(--color-stone-800);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 140ms var(--ease-standard),
+                background 140ms var(--ease-standard),
+                transform 140ms var(--ease-standard),
+                box-shadow 140ms var(--ease-standard);
+  }
+  .dor-btn:hover {
+    border-color: var(--color-brand-green);
+    background: var(--color-brand-green-50);
+    box-shadow: var(--shadow-md);
+  }
+  .dor-btn:active { transform: translateY(1px); }
+  .dor-btn .dor-arrow {
+    flex-shrink: 0;
+    color: var(--color-stone-300);
+    display: grid;
+    place-items: center;
+    transition: color 140ms var(--ease-standard), transform 140ms var(--ease-standard);
+  }
+  .dor-btn:hover .dor-arrow {
+    color: var(--color-brand-green);
+    transform: translateX(2px);
+  }
+
+  /* ===================== CASO (história + comparador) ===================== */
+  .modal.caso { max-width: 540px; padding: 0; overflow: hidden; }
+  .caso-body {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .caso-figure {
+    position: relative;
+    width: 100%;
+    background: var(--color-stone-100);
+  }
+  .caso-text { padding: 26px 30px 30px; }
+  .caso-quote {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.018em;
+    color: var(--color-stone-900);
+    border-left: 4px solid var(--color-brand-green);
+    padding-left: 16px;
+    margin-bottom: 26px;
+  }
+  .caso-block { margin-bottom: 20px; }
+  .caso-block:last-child { margin-bottom: 0; }
+  .caso-block-title {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-green-700);
+    margin-bottom: 7px;
+  }
+  .caso-block p {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--color-stone-700);
+  }
+  .caso-soon {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-stone-500);
+    font-style: italic;
+  }
+
+  @media (max-width: 540px) {
+    .modal { padding: 32px 22px 24px; }
+    .modal.caso { padding: 0; }
+    .modal h3.aviso-headline { font-size: 22px; padding: 14px 16px; }
+    .caso-text { padding: 22px 22px 26px; }
+    .caso-quote { font-size: 19px; }
+    .dor-btn { font-size: 15px; padding: 15px 16px; }
+  }
+
+  /* ===================== COMPARADOR ANTES/DEPOIS ===================== */
+  .ba-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+    cursor: pointer;
+    background: var(--color-stone-100);
+  }
+  /* Dentro do caso, limita a altura pra a história ficar ao alcance */
+  .caso-figure .ba-slider {
+    aspect-ratio: auto;
+    height: min(58vh, 540px);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ba-slider { cursor: ew-resize; }
+  }
+  .ba-slider:focus-visible {
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: -4px;
+  }
+
+  .ba-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  .ba-after-wrap {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    clip-path: inset(0 0 0 var(--pos, 50%));
+  }
+
+  .ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos, 50%);
+    width: 2px;
+    background: #fff;
+    transform: translateX(-50%);
+    pointer-events: none;
+    box-shadow: 0 0 0 1px rgba(20, 19, 15, 0.06);
+  }
+
+  .ba-handle {
+    position: absolute;
+    top: 50%;
+    left: var(--pos, 50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: #fff;
+    border: 2px solid var(--color-stone-200);
+    box-shadow: var(--shadow-md);
+    color: var(--color-stone-600);
+    display: grid;
+    place-items: center;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /* Welcome animation: transition só ativa durante .welcoming */
+  .ba-slider.welcoming .ba-after-wrap { transition: clip-path 300ms ease-out; }
+  .ba-slider.welcoming .ba-divider,
+  .ba-slider.welcoming .ba-handle { transition: left 300ms ease-out; }
+
+  .ba-badge {
+    position: absolute;
+    top: 12px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-sm);
+    pointer-events: none;
+  }
+  .ba-badge-before { left: 12px; background: #fff; color: var(--color-stone-900); }
+  .ba-badge-after { right: 12px; background: var(--color-brand-green); color: #fff; }
+
+  .ba-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20, 19, 15, 0.55);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 320ms var(--ease-standard);
+  }
+  .ba-slider.touched .ba-hint { opacity: 0; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="container-page">
+    <div class="section-head center">
+      <div class="eyebrow"><span class="line"></span>Resultados reais</div>
+      <h2>Pessoas reais.</h2>
+    </div>
+    <div class="cases-cta-wrap">
+      <button id="open-aviso" type="button" class="btn btn-outline">
+        Ver casos autorizados
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de aviso -->
+<div class="modal-backdrop" id="modal-aviso">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close="aviso" aria-label="Fechar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span>Fechar</span>
+    </button>
+    <h3 class="aviso-headline">Antes de você ver as fotos, leia.</h3>
+    <p>
+      Cada paciente aqui tem uma história diferente da sua. Não compare.
+      Ninguém mudou do dia pra noite, e nenhum resultado veio sem tempo,
+      processo, acerto e erro. Não tem milagre nem atalho.
+    </p>
+    <p>
+      A foto mostra só o que se vê por fora. Mas o que mudou em cada um foi
+      o sono, o intestino, a disposição, a paz com a comida. O resultado de
+      verdade está em coisas que a câmera não pega.
+    </p>
+    <p class="aviso-question">Entendido?</p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-green btn-block btn-lg" id="proceed-cases">
+        Sim, ficou claro!
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal lista de casos (botões por situação de vida) -->
+<div class="modal-backdrop" id="modal-lista">
+  <div class="modal lista" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close="lista" aria-label="Fechar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span>Fechar</span>
+    </button>
+    <div class="lista-body">
+      <div class="lista-head">
+        <h3>Qual dessas histórias parece a sua?</h3>
+        <p>Toque na situação que mais bate com o que você viveu. Você abre um caso por vez.</p>
+      </div>
+      <div class="lista-group" id="grupo-mulheres">
+        <div class="lista-group-title">Mulheres</div>
+        <div class="dor-list" id="lista-mulheres"></div>
+      </div>
+      <div class="lista-group" id="grupo-homens">
+        <div class="lista-group-title">Homens</div>
+        <div class="dor-list" id="lista-homens"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de um caso (história + comparador) -->
+<div class="modal-backdrop" id="modal-caso">
+  <div class="modal caso" role="dialog" aria-modal="true">
+    <button class="modal-back" id="caso-back" aria-label="Voltar aos casos">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25"><path d="m15 18-6-6 6-6"/></svg>
+      <span>Voltar</span>
+    </button>
+    <button class="modal-close" data-close="caso" aria-label="Fechar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span>Fechar</span>
+    </button>
+    <div class="caso-body" id="caso-body"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   Cada caso é uma situação de vida. O lead lê os botões, reconhece o dele,
+   clica e abre um caso só: a foto (comparador antes/depois) e a história.
+
+   Quem TEM foto vira botão na lista. Quem ainda não tem foto fica pronto
+   aqui no código (photo: null) e aparece sozinho assim que a foto entrar
+   na pasta fotos/NN/. Pra mexer nas fotos, veja fotos/LEIA-ME.txt e me chame.
+
+   group: "m" (mulheres), "h" (homens), "ambos" (casal, entra nos dois).
+   ========================================================================= */
+const cases = [
+  /* ---------------- MULHERES ---------------- */
+  {
+    key: "carol-castro", group: "m", photo: "01",
+    button: "A que se esqueceu de si pra cuidar de quem amava",
+    quote: "Parei tudo da minha vida pra cuidar dele. Fui parando de me cuidar e quando me assustei, estava lá no fundo do poço.",
+    blocks: [
+      { t: "De onde ela veio", p: "A Carol já tinha emagrecido antes e estava indo bem. Aí o avô adoeceu, e ela parou tudo pra cuidar dele. Foi se anulando aos poucos, e quando se deu conta estava lá no fundo. Não foi efeito sanfona de dieta, foi a vida que pesou. O processo voltou a engordar tudo, e ela vivia cansada, sem energia, achando que era só fazer a dieta direito de novo que tudo se ajeitava. Só que ela já tinha entendido que não era assim, porque comer nunca foi só comer pra ela. Vinha estresse, vinha luto, vinha a comida como conforto." },
+      { t: "O que mudou", p: "A Carol fez o uso da medicação como uma ferramenta, mas compreendeu e fez a parte que sustenta tudo. Levou a sério a alimentação e mantém os exercícios com frequência. Ela sabe que o remédio sozinho não resolve, que a mudança de hábito é o que segura o resultado quando a vida apertar de novo. Aprendeu a colocar comida pra dentro na medida certa, sem usar o prato como regulador de tudo, e a lidar com os momentos difíceis sem descontar. Hoje ela come bem no dia a dia, e quando chega o fim de semana ela tem o equilíbrio pra comer o que gosta, até uma cervejinha, sem que aquilo vire um problema." },
+      { t: "Onde ela está hoje", p: "A Carol voltou a se priorizar. Voltou pra academia, recuperou disposição, e o cuidado com ela mesma parou de ficar em último lugar. O resultado não veio de um corte, veio de ela aprender a se sustentar mesmo com a vida real acontecendo em volta. Hoje ela carrega o que aprendeu, reconhece o que a leva a descontar na comida, e tem o que fazer com isso. Saiu do fundo do poço e voltou a ser dona da própria rotina." }
+    ]
+  },
+  {
+    key: "lauriele", group: "m", photo: "03",
+    button: "A que emagreceu com a caneta e tinha medo de voltar tudo",
+    quote: "Meu medo é voltar pra aquilo ali. Eu não me reconhecia, eu não conseguia me ver que eu tava daquele jeito.",
+    blocks: [
+      { t: "De onde ela veio", p: "A Lauriele emagreceu bastante com a medicação, e isso mudou a vida dela. Mas chegou numa fase que assusta muita gente, a fome voltou quando a dose diminuiu, o peso na balança subiu um pouco, e ela entrou em desespero. Ficava o tempo todo olhando pra balança tentando adivinhar se ia voltar pra estaca zero. O medo dela era um só, refazer todo o esforço e ver tudo escorrer de novo. E no fundo ela sabia que perder peso com remédio não era a mesma coisa que aprender a se manter." },
+      { t: "O que mudou", p: "A Lauriele entendeu que a balança parou de ser a métrica. O que importava agora era o hábito, e se o hábito tava no lugar, o peso podia oscilar sem significar fracasso. Aprendeu a comer de verdade, na quantidade certa, montando o prato com volume e variedade pra não passar fome quando saísse do remédio. Parou de tratar a comida como inimiga e parou de viver com medo de comer. Hoje ela sabe que se a musculatura voltar e a gordura diminuir, o número na balança é o que menos importa." },
+      { t: "Onde ela está hoje", p: "A Lauriele sustenta o resultado olhando pro corpo, não pro peso. Treina todos os dias, recuperou a segurança, e o cuidado parou de ser uma corrida contra a balança. O que ela construiu com a caneta ela aprendeu a manter sem depender dela, porque dessa vez ela tratou a causa, não só o sintoma. Saiu da fase do medo e entrou na fase de quem entende o próprio corpo e confia no que está fazendo." }
+    ]
+  },
+  {
+    key: "kiane", group: "m", photo: "05",
+    button: "A que sabia treinar e fazer dieta, mas vivia no tudo ou nada",
+    quote: "Hoje eu consigo passar uma semana sem dieta e na semana seguinte voltar como se nada tivesse acontecido.",
+    blocks: [
+      { t: "De onde ela veio", p: "A Kiane nunca teve dificuldade com disciplina. Sabe treinar, sabe seguir a dieta, faz a marmita, leva a quantidade certa, não enjoa de comer comida de verdade. O que faltava não era força de vontade, era equilíbrio. Ela vivia na lógica do oito ou oitenta, ou estava cem por cento na linha, ou tinha saído dela. Não existia meio termo. E sempre que saía, vinha o peso na consciência, porque a relação com o doce ainda carregava o medo de voltar a ser o que era." },
+      { t: "O que mudou", p: "Kiane aprendeu que não precisava escolher entre o controle total e o descontrole. Que dava pra ter o doce dentro da rotina, na medida, sem que aquilo significasse ter estragado tudo. O ponto não foi cortar mais, foi soltar o que estava apertado demais. Ela entendeu que o corpo dela, com o tanto de atividade que faz, comporta esse equilíbrio, e que flexibilidade não é deslize, é parte do plano. A comida deixou de ser uma régua de certo e errado." },
+      { t: "Onde ela está hoje", p: "Ela sustenta o resultado sem viver na corda bamba. Passa um fim de semana fora da linha e volta na segunda como se nada tivesse acontecido, sem drama e sem se cobrar. Hoje ela consegue voltar, pra ela não é difícil. O cuidado virou automático, parte de quem ela é, e ela não precisa mais de ninguém vigiando pra se manter. Chegou no lugar onde o controle parou de ser uma luta diária." }
+    ]
+  },
+  {
+    key: "mayara", group: "m", photo: "07",
+    button: "A que se viu numa foto e não se reconheceu",
+    quote: "Meu sobrinho tirou uma foto, eu estava sentada e eu vi o tamanho dos meus braços, o tamanho do meu rosto. Eu falei, gente, essa não sou eu.",
+    blocks: []
+  },
+  {
+    key: "michelli", group: "m", photo: "08",
+    button: "A que aprendeu a viver, não a fazer dieta",
+    quote: "Fui viajar e não voltei com medo da balança. Voltei com orgulho de mim.",
+    blocks: []
+  },
+  {
+    key: "carol-zaiden", group: "m", photo: null,
+    button: "A que parou de buscar dieta e começou a aprender",
+    quote: "Eu não quero fazer dieta, eu quero viver minha vida.",
+    blocks: [
+      { t: "De onde ela veio", p: "A Carol chegou querendo o que quase todo mundo quer no começo, perder alguns quilos. Era uma meta de número, com data e expectativa. O que ela não esperava era o que aconteceu no segundo mês. Em vez de mais uma dieta pra seguir até cansar, ela percebeu que o que estava sendo construído não tinha prazo pra acabar. Não era uma fase. Era um jeito de comer que ela ia levar pra sempre." },
+      { t: "O que mudou", p: "Ela parou de tratar comida como regra e passou a entender comida. A virada não foi no corpo, foi na cabeça. Carol entendeu que não precisava de uma dieta, precisava aprender a comer melhor, e isso tirou dela o peso de começar e parar, começar e parar. Conforme o processo foi andando, a vida foi mudando junto. Hoje ela corre em outro nível, faz prova, sustenta energia que antes ela achava que ia ter que abrir mão. Mas isso veio depois, como consequência. Não foi o que ela pediu no dia um." },
+      { t: "Onde ela está hoje", p: "Ela não precisa mais de acompanhamento toda semana, porque ela mesma percebe. Qualquer alteração ela já questiona, ela tem percepção agora. Esse é o ponto de chegada do trabalho, a pessoa não depende mais de ninguém pra se manter. A Carol vive a vida dela, viaja, corre, faz o que gosta, e o cuidado virou parte de quem ela é, não uma obrigação com data pra terminar." }
+    ]
+  },
+  {
+    key: "ana-carolina", group: "m", photo: null,
+    button: "A que comia pra dar conta da ansiedade",
+    quote: "Antes a gente corria de foto. Hoje eu já estou aceitando tirar foto.",
+    blocks: [
+      { t: "De onde ela veio", p: "A comida era o escape dela. Nos momentos de ansiedade e estresse vinha o descontrole, principalmente à noite, e depois a culpa. Vivia no vai e vem entre disciplina e exagero, e a cada deslize remoía tanto que aquilo virava combustível pro próximo. A balança era fonte de aflição, e a comparação só aumentava a frustração. O medo dela era não conseguir mais, ver que dessa vez também não ia dar." },
+      { t: "O que mudou", p: "Ana aprendeu a passar pelos momentos de ansiedade sem correr pra comida. Não foi cortando nada, foi entendendo. Hoje ela reconhece o gatilho e tem o que fazer com ele, em vez de descontar no prato. Come de tudo com consciência, sem culpa e sem restrição absurda, porque entendeu que equilíbrio sustenta mais do que perfeição. E entendeu também que resultado não vem com pressa, vem com constância, o que tirou dela o peso de cobrar tudo de uma vez." },
+      { t: "Onde ela está hoje", p: "Ela parou de correr de foto. Antes, quando estava muito acima do peso, fugia da câmera. Hoje aceita ser fotografada e às vezes nem se reconhece olhando pra trás. Virou multiatleta, faz musculação, corre, pedala, joga beach tênis, dança. As roupas que ela tinha guardado de antes da pandemia voltaram a servir. O cuidado virou parte da rotina dela, não uma luta com data pra acabar." }
+    ]
+  },
+  {
+    key: "jane", group: "m", photo: null,
+    button: "A que comia certo mas não sabia o quanto",
+    quote: "Tudo que eu gosto de comer é a minha dieta. Era a quantidade que estava errada.",
+    blocks: [
+      { t: "De onde ela veio", p: "A Jane chegou com a diabetes apertando. Ela já se cuidava, comia salada, arroz e feijão, carne branca, fazia atividade física, e mesmo assim a glicemia estava lá em cima e a gordura corporal alta. A médica falou que ela precisava de orientação, e ela resistiu, porque na cabeça dela já fazia tudo certo. O problema não era o que ela comia. Era o quanto, e isso ninguém tinha mostrado pra ela." },
+      { t: "O que mudou", p: "Jane descobriu que não precisava cortar o que gostava, precisava ajustar a quantidade. Continuou comendo pão, arroz, feijão, as coisas do dia a dia dela, só que na medida certa. A glicemia desabou, a glicada normalizou, e ela viu que dava pra controlar o diabetes sem viver de restrição. Hoje ela come fora, vai na sorveteria, escolhe o que vale a pena, e sabe exatamente o que está fazendo. Não porque conta tudo o tempo todo, mas porque o padrão virou natural." },
+      { t: "Onde ela está hoje", p: "Ela não depende mais de pesar nem de fotografar a comida. O dever de casa ela já sabe, é o padrão. Hoje ela come satisfeita e não fica remoendo, sai da rotina e volta sem culpa, sustenta o resultado sem sofrer pra isso. E o cuidado dela arrastou a casa toda, o marido, as filhas, todo mundo entrou na mesma vibe. O exemplo dela virou referência pra família." }
+    ]
+  },
+  {
+    key: "thaisa", group: "m", photo: null,
+    button: "A que descobriu que o difícil não é chegar, é sustentar",
+    quote: "Não é difícil chegar, é difícil manter.",
+    blocks: [
+      { t: "De onde ela veio", p: "A Thaisa chegou querendo o resultado estético, e achava que era só montar a dieta certa. Mas o que mais a afastava de sustentar não era o cardápio, eram dois hábitos. O fim de semana, que sempre saía do controle, e a relação com o doce, que ela mesma sempre foi sincera em admitir que era um ponto fraco. Ela já tinha conseguido emagrecer antes, o problema nunca foi chegar. Era manter sem voltar pra trás." },
+      { t: "O que mudou", p: "A Thaisa aprendeu que, quanto mais exigente é o resultado que ela busca, mais o equilíbrio importa, e menos a restrição funciona. Na pancada da restrição até dá pra chegar, mas não dá pra ficar, porque ninguém sustenta o sacrifício pra sempre. O fim de semana deixou de ser um problema, hoje ela aproveita os momentos sociais sem exagero e sem culpa, na medida que não atrapalha o que ela construiu. E a relação com o doce mudou de dentro pra fora. Ela percebe quando não vale a pena, sabe parar, e não vive mais refém da vontade. O corpo dela foi se acostumando a um jeito novo de viver, e o que antes era descontrole virou escolha consciente." },
+      { t: "Onde ela está hoje", p: "A Thaisa olha pra si mesma e sente que chegou onde queria. Mas o que ela mais aprendeu foi que o trabalho de verdade começa depois de chegar. Hoje ela sustenta o resultado porque entendeu que a paz não está em bater a meta, está em manter sem sofrer. Ela vive a rotina dela, treina forte, aproveita a vida, e sabe que tem o controle nas próprias mãos. Saiu da lógica de conquistar e perder, e entrou na de conquistar e manter." }
+    ]
+  },
+
+  /* ---------------- HOMENS ---------------- */
+  {
+    key: "claudio", group: "h", photo: "02",
+    button: "O que recebia lista de nutricionista e nada encaixava na vida dele",
+    quote: "Eu tinha ido em várias nutricionistas, daí já passa uma lista. Já tem uma lista em mente que não é do seu dia a dia.",
+    blocks: [
+      { t: "De onde ele veio", p: "O Claudio já tinha tentado com outras nutricionistas, e sempre acontecia a mesma coisa. Vinha uma lista de alimento que não era do dia a dia dele, coisa que ele não sabia onde comprava nem como fazia. Ele seguia uns dias e não virava nada, não encaixava. Não fazia café da manhã de jeito nenhum, e aí dava aquela fome no fim da tarde e à noite, a hora que ele começava a beliscar, fritura, essas coisas. Nunca tinha sido mudança de hábito de verdade, era sempre uma dieta de fora que não cabia na vida dele." },
+      { t: "O que mudou", p: "O Claudio descobriu que dava pra fazer com a comida do dia a dia, sem lista estranha e sem nada que ele não comesse. O café da manhã, que ele pulava sempre, virou rotina, e isso sozinho já mudou o jogo, porque tirou a fome descontrolada da tarde. Ele é certinho por natureza, cumpre o que combina, então quando o plano passou a ser simples e do mundo real dele, ele sustentou sem esforço. E teve um detalhe que fez toda a diferença, ele e a esposa entraram juntos. Um passou a ajudar o outro, e o que era cada um por si virou um projeto da casa." },
+      { t: "Onde ele está hoje", p: "O Claudio sustenta o resultado porque ele mudou o hábito, não decorou uma dieta. Hoje ele e a esposa acordam, sentam, fazem o café da manhã juntos, e virou um momento bom dos dois, não uma obrigação. O cuidado deles virou exemplo dentro de casa, até o filho adolescente já ligou o alerta e começou a se cuidar. O Claudio saiu do ciclo de tentar com lista de fora e chegou num lugar onde o jeito de comer é dele, cabe na vida dele, e ele consegue manter." }
+    ]
+  },
+  {
+    key: "rafael", group: "h", photo: "06",
+    button: "O que achava que rotina puxada e dieta não combinavam",
+    quote: "Eu não achava que dava pra perder a barriga e ainda comer o que gosto.",
+    blocks: [
+      { t: "De onde ele veio", p: "O Rafael é agrônomo e vive na correria entre cidade e campo, passando o dia em fazenda diferente, na estrada, em horário irregular. Ele tinha certeza de que dieta não combinava com a vida dele, que com aquele estilo de vida não dava pra se alimentar bem. Comia muito por delivery, e nem percebia o quanto aquilo pesava no corpo e no bolso. Tentava comer melhor por conta, não via resultado, e achava que o problema era falta de tempo. E tinha um medo que travava ele de começar, achar que ia ter que abrir mão do churrasco e da cerveja com os amigos pra sempre." },
+      { t: "O que mudou", p: "O Rafael descobriu que o problema nunca foi falta de tempo, era falta de estratégia. Aprendeu a se alimentar de um jeito prático que cabia na rotina dele, entre cidade, fazenda e estrada, sem depender de receita complicada. Cortou boa parte do delivery, o que ajudou no corpo e sobrou dinheiro no fim do mês. E aprendeu o que mais o assustava, que dava pra aproveitar o churrasco e a cerveja sem culpa e sem exagero, porque é o equilíbrio que garante constância. Ele entendeu que não precisava viver em restrição pra evoluir, só saber a hora certa de cada escolha." },
+      { t: "Onde ele está hoje", p: "O Rafael provou pra si mesmo que dava, mesmo com a rotina mais puxada. Hoje ele come bem nos dias em casa, aproveita os momentos com os amigos sem peso na consciência, e sustenta o resultado porque o jeito de comer foi desenhado pra vida real dele, não pra uma vida ideal que ele não tem. Saiu da frustração de tentar e não ver resultado, e chegou num lugar onde ele tem autonomia e consciência do próprio corpo." }
+    ]
+  },
+  {
+    key: "luis", group: "h", photo: "09",
+    button: "O que era magro, mas tinha gordura abdominal alta",
+    quote: "Sempre tive dificuldade com horário de comer na parte da tarde.",
+    blocks: [
+      { t: "De onde ele veio", p: "O Luis é empresário do agro, vive na correria, muita reunião, muito tempo no campo, pouco tempo pra preparar comida. Ele sempre foi magro, mas tinha uma gordura abdominal que incomodava, e queria ganhar massa muscular. O problema dele não era peso, era composição corporal. E a maior dificuldade era prática, ter que comer em horário que a rotina não deixava, principalmente na parte da tarde, e a vontade de doce que aparecia sem um plano pra encaixar." },
+      { t: "O que mudou", p: "O caso do Luis não foi sobre cortar, foi sobre desenhar. A gente lapidou uma rotina alimentar prática, que coubesse na correria dele, sem depender de receita elaborada. Ao mesmo tempo que ele ganhou músculo, a gente trabalhou a redução da gordura que incomodava. E o doce, que ele sempre gostou, parou de ser um problema, porque ele aprendeu a encaixar de um jeito estratégico, sem colocar tudo a perder." },
+      { t: "Onde ele está hoje", p: "Hoje o Luis segue a vida dele com uma alimentação equilibrada, mantendo boa parte da composição corporal que construiu, e com autonomia pra se virar sozinho na rotina puxada que tem. O resultado se sustenta porque foi feito pra caber na vida real dele, não numa rotina que ele não tem." }
+    ]
+  },
+  {
+    key: "alexandre", group: "h", photo: null,
+    button: "O que achava que emagrecer era viver de salada e carne",
+    quote: "Espero encontrar um caminho pra conseguir perder peso de forma sustentável.",
+    blocks: [
+      { t: "De onde ele veio", p: "O Alexandre chegou querendo um caminho pra perder peso que ele conseguisse manter, porque já tinha tentado de tudo por conta própria e nada ficava. Vivia estagnado, com o peso travado, sem entender o que estava fazendo de errado mesmo se esforçando. A alimentação dele era monótona, praticamente só salada e carne, o que tornava tudo cansativo e sem prazer. E o fim de semana era o ponto fraco, churrasco, petisco e cerveja, era quando tudo desandava. No fundo ele tinha medo de envelhecer perdendo forma e energia, mas não sabia como mudar sem abrir mão do prazer de viver." },
+      { t: "O que mudou", p: "O Alexandre largou o padrão restritivo de salada e carne e passou a comer de forma completa, com variedade e prazer. Entendeu que não precisava cortar tudo que gostava, precisava aprender a equilibrar. Aprendeu a lidar com o fim de semana sem culpa e sem exagero, provando que dá pra aproveitar a vida sem perder o foco. E ele é determinado, tinha uma meta pessoal pro aniversário e bateu, com disciplina e constância, não com pressa. O processo deixou de ser pesado e virou algo que ele conseguia sustentar." },
+      { t: "Onde ele está hoje", p: "O Alexandre construiu uma recomposição corporal que ele não imaginava, mais leve, mais forte, com mais energia. Mas o que sustenta o resultado não é o número, é a cabeça que mudou. Ele desenvolveu autoconfiança e uma mentalidade madura sobre o processo, entendeu que resultado duradouro vem de constância. Hoje ele aproveita o fim de semana, vive a vida, e mantém o foco sem que isso seja um peso. Saiu da estagnação e do medo de envelhecer perdendo forma, e chegou num lugar onde ele confia no que está fazendo." }
+    ]
+  },
+  {
+    key: "marcelo", group: "h", photo: null,
+    button: "O que emagrecia na base do sacrifício e voltava tudo",
+    quote: "Fazia uma dieta doida, emagrecia, voltava e voltava. Nunca conseguia manter.",
+    blocks: [
+      { t: "De onde ele veio", p: "O Marcelo foi gordinho a vida inteira, desde criança, e isso deixou marca, bullying, relação ruim com a comida, aquele histórico que pesa. Na pandemia, com a ansiedade no talo, ele resolveu reagir. Começou a correr, fez dieta por conta própria, emagrecia, mas era tudo no sacrifício, na fome. Aí voltava. Emagrecia de novo, voltava de novo. Nunca conseguia manter. Quando focou no treino e perdeu um bom tanto sozinho, começou a sentir que estava perdendo até músculo, fazendo tudo no olhômetro, sem saber se estava acertando." },
+      { t: "O que mudou", p: "O Marcelo entendeu, pela primeira vez, o que era ter um plano elaborado em vez de uma dieta doida. Aprendeu que o corpo precisa de comida pra treinar e pra mudar, que perder peso na base do sacrifício não constrói nada que se sustente. Descobriu que o problema não era mais o peso, era a composição corporal, transformar o que ele já tinha conquistado em algo mais sólido. E descobriu que dava pra fazer isso comendo de verdade, com energia pra treinar, sem aquela restrição que sempre o fazia desistir e voltar pra estaca zero." },
+      { t: "Onde ele está hoje", p: "O Marcelo parou de viver no vai e vem. Em vez de emagrecer e voltar, ele sustenta, porque entendeu o processo em vez de só seguir regra. Treina forte, tem energia, e o cuidado com a comida deixou de ser uma luta contra a fome pra virar parte da rotina dele. Saiu do ciclo que marcou a vida inteira dele, perder e recuperar, e chegou num lugar onde ele sabe o que está fazendo e por quê. O que ele construiu agora, ele consegue manter." }
+    ]
+  },
+
+  /* ---------------- CASAL (entra nos dois grupos) ---------------- */
+  {
+    key: "antonio-tatiani", group: "ambos", photo: null,
+    button: "Os dois que fizeram juntos e um sustentou o outro",
+    quote: "O problema é o fim de semana, é quando tudo desanda.",
+    blocks: [
+      { t: "De onde eles vieram", p: "Antônio e Tatiani chegaram sentindo que tinham perdido o controle. Comiam bem durante a semana, mas sempre acabavam exagerando, e depois vinha o peso na consciência. O fim de semana era o ponto fraco, era quando tudo desandava. Ele vivia cansado, sem disposição, tinha perdido o prazer de se olhar no espelho. Ela se incomodava com o inchaço e com a frustração de não conseguir manter resultado. Os dois usavam fritura e doce como válvula de escape depois do trabalho, e juntos acabavam reforçando o hábito um do outro. Ainda achavam que comer bem era caro, que precisava gastar muito, e isso fazia eles adiarem o começo." },
+      { t: "O que mudou", p: "Os dois entenderam que o segredo não era cortar tudo, era aprender a equilibrar o que gostam com o que precisam. Descobriram que comer bem era questão de organização, não de gastar mais. E a maior virada foi fazer isso juntos. Em vez de um sabotar o outro no fim de semana, um passou a sustentar o outro. Aprenderam a aproveitar os momentos sociais sem culpa, a comer com equilíbrio nos dias que antes desandavam, e a substituir a fritura e o doce por coisas que saciam sem perder o prazer de comer. O que era um ciclo de cansaço e desânimo virou uma rotina mais leve, com os dois remando pro mesmo lado." },
+      { t: "Onde eles estão hoje", p: "Antônio recuperou a disposição e voltou a se reconhecer no espelho. Tatiani saiu da frustração de começar e parar toda segunda. Os dois dormem melhor, têm mais energia, e o vínculo do casal ficou mais forte por causa do processo, não apesar dele. O cuidado virou coisa dos dois, parte da rotina da casa, não uma luta solitária de cada um. Hoje eles sustentam o resultado porque têm um no outro o apoio que faltava." }
+    ]
+  }
+];
+
+/* ---------- Constantes do comparador (1:1 do componente React) ---------- */
+const MIN = 5, MAX = 95;
+const REST = 65;   // posição de descanso do handle
+const PEEK = 57;   // ponto da "espiada" no welcome
+const STEP_MS = 300;
+const clamp = (n) => Math.min(MAX, Math.max(MIN, n));
+
+const chevronSVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25"><path d="m9 7-5 5 5 5"/><path d="m15 7 5 5-5 5"/></svg>`;
+const arrowSVG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25"><path d="m9 18 6-6-6-6"/></svg>`;
+
+/* ---------- Cria o comparador de um caso ---------- */
+function buildSlider(item) {
+  const before = `fotos/${item.photo}/antes.webp`;
+  const after = `fotos/${item.photo}/depois.webp`;
+
+  const slider = document.createElement('div');
+  slider.className = 'ba-slider';
+  slider.style.setProperty('--pos', REST + '%');
+  slider.setAttribute('role', 'slider');
+  slider.setAttribute('aria-label', 'Comparação antes e depois');
+  slider.setAttribute('aria-valuemin', '0');
+  slider.setAttribute('aria-valuemax', '100');
+  slider.setAttribute('aria-valuenow', String(REST));
+  slider.tabIndex = 0;
+
+  slider.innerHTML = `
+    <img src="${before}" alt="" class="ba-image" decoding="async" draggable="false">
+    <div class="ba-after-wrap" aria-hidden="true">
+      <img src="${after}" alt="" class="ba-image" decoding="async" draggable="false">
+    </div>
+    <div class="ba-divider" aria-hidden="true"></div>
+    <div class="ba-handle" aria-hidden="true">${chevronSVG}</div>
+    <span class="ba-badge ba-badge-before">Antes</span>
+    <span class="ba-badge ba-badge-after">Depois</span>
+    <span class="ba-hint" aria-hidden="true">Arraste para comparar</span>
+  `;
+
+  attachSlider(slider);
+  return slider;
+}
+
+/* ---------- Lógica de arrastar (porte do BeforeAfterCard.tsx) ---------- */
+function attachSlider(slider) {
+  let dragging = false;
+  let welcomed = false;
+
+  const setPos = (pct) => {
+    const clamped = clamp(pct);
+    slider.style.setProperty('--pos', clamped + '%');
+    slider.setAttribute('aria-valuenow', String(Math.round(clamped)));
+  };
+  const updateFromClientX = (clientX) => {
+    const rect = slider.getBoundingClientRect();
+    setPos(((clientX - rect.left) / rect.width) * 100);
+  };
+  const cancelWelcome = () => slider.classList.remove('welcoming');
+
+  /* Mouse / pointer */
+  slider.addEventListener('pointerdown', (e) => {
+    cancelWelcome();
+    slider.classList.add('touched');
+    dragging = true;
+    updateFromClientX(e.clientX);
+    try { slider.setPointerCapture(e.pointerId); } catch (_) {}
+  });
+  slider.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    updateFromClientX(e.clientX);
+  });
+  const endDrag = (e) => {
+    try {
+      if (slider.hasPointerCapture(e.pointerId)) slider.releasePointerCapture(e.pointerId);
+    } catch (_) {}
+    dragging = false;
+  };
+  slider.addEventListener('pointerup', endDrag);
+  slider.addEventListener('pointercancel', endDrag);
+
+  /* Clique simples posiciona a divisória (fallback iOS) */
+  slider.addEventListener('click', (e) => {
+    cancelWelcome();
+    slider.classList.add('touched');
+    updateFromClientX(e.clientX);
+  });
+
+  /* Touch nativo: distingue gesto horizontal (arrasta) de vertical (rola) */
+  let startX = 0, startY = 0, direction = null;
+  const THRESHOLD = 8;
+  slider.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    direction = null;
+    cancelWelcome();
+    slider.classList.add('touched');
+    updateFromClientX(startX);
+  }, { passive: true });
+  slider.addEventListener('touchmove', (e) => {
+    if (e.touches.length !== 1) return;
+    const x = e.touches[0].clientX, y = e.touches[0].clientY;
+    if (direction === null) {
+      const dx = Math.abs(x - startX), dy = Math.abs(y - startY);
+      if (dx < THRESHOLD && dy < THRESHOLD) return;
+      direction = dx > dy ? 'h' : 'v';
+    }
+    if (direction === 'h') {
+      e.preventDefault();
+      updateFromClientX(x);
+    }
+  }, { passive: false });
+
+  /* Teclado: setas movem a divisória */
+  slider.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      cancelWelcome();
+      slider.classList.add('touched');
+      const cur = parseFloat(slider.style.getPropertyValue('--pos')) || REST;
+      setPos(cur + (e.key === 'ArrowRight' ? 4 : -4));
+    }
+  });
+
+  /* Welcome animation quando o comparador aparece (≥40% visível) */
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting || welcomed) continue;
+        welcomed = true;
+        io.unobserve(entry.target);
+        if (slider.classList.contains('touched')) continue;
+        slider.classList.add('welcoming');
+        requestAnimationFrame(() => {
+          slider.style.setProperty('--pos', PEEK + '%');
+          setTimeout(() => slider.style.setProperty('--pos', REST + '%'), STEP_MS);
+          setTimeout(() => slider.classList.remove('welcoming'), STEP_MS * 2);
+        });
+      }
+    }, { root: null, threshold: 0.4 });
+    io.observe(slider);
+  }
+}
+
+/* ---------- Monta a lista de botões (só quem tem foto) ---------- */
+function makeDorBtn(c) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'dor-btn';
+  btn.innerHTML = `<span>${c.button}</span><span class="dor-arrow" aria-hidden="true">${arrowSVG}</span>`;
+  btn.addEventListener('click', () => openCaso(c));
+  return btn;
+}
+
+function renderLista() {
+  const elM = document.getElementById('lista-mulheres');
+  const elH = document.getElementById('lista-homens');
+  let nM = 0, nH = 0;
+  cases.forEach((c) => {
+    if (!c.photo) return;                       // sem foto ainda: fica pronto, mas não aparece
+    if (c.group === 'm' || c.group === 'ambos') { elM.appendChild(makeDorBtn(c)); nM++; }
+    if (c.group === 'h' || c.group === 'ambos') { elH.appendChild(makeDorBtn(c)); nH++; }
+  });
+  // Esconde o grupo inteiro se não tiver nenhum caso com foto
+  if (nM === 0) document.getElementById('grupo-mulheres').style.display = 'none';
+  if (nH === 0) document.getElementById('grupo-homens').style.display = 'none';
+}
+
+/* ---------- Abre um caso (história + comparador) ---------- */
+function openCaso(c) {
+  const body = document.getElementById('caso-body');
+  body.innerHTML = '';
+
+  if (c.photo) {
+    const fig = document.createElement('div');
+    fig.className = 'caso-figure';
+    fig.appendChild(buildSlider(c));
+    body.appendChild(fig);
+  }
+
+  const text = document.createElement('div');
+  text.className = 'caso-text';
+
+  let html = '';
+  if (c.quote) html += `<p class="caso-quote">${c.quote}</p>`;
+  if (c.blocks && c.blocks.length) {
+    c.blocks.forEach((b) => {
+      html += `<div class="caso-block"><div class="caso-block-title">${b.t}</div><p>${b.p}</p></div>`;
+    });
+  } else {
+    html += `<p class="caso-soon">A história completa deste caso entra em breve.</p>`;
+  }
+  text.innerHTML = html;
+  body.appendChild(text);
+
+  closeModal('lista');
+  openModal('caso');
+  body.scrollTop = 0;
+}
+
+/* ---------- Modais ---------- */
+function openModal(id) {
+  document.getElementById('modal-' + id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById('modal-' + id).classList.remove('open');
+  if (!document.querySelector('.modal-backdrop.open')) {
+    document.body.style.overflow = '';
+  }
+}
+
+renderLista();
+
+document.getElementById('open-aviso').addEventListener('click', () => openModal('aviso'));
+document.getElementById('proceed-cases').addEventListener('click', () => {
+  closeModal('aviso');
+  openModal('lista');
+});
+document.getElementById('caso-back').addEventListener('click', () => {
+  closeModal('caso');
+  openModal('lista');
+});
+document.querySelectorAll('[data-close]').forEach((btn) => {
+  btn.addEventListener('click', () => closeModal(btn.dataset.close));
+});
+/* Clique no fundo escuro fecha (no caso, volta pra lista) */
+document.querySelectorAll('.modal-backdrop').forEach((bd) => {
+  bd.addEventListener('click', (e) => {
+    if (e.target !== bd) return;
+    const id = bd.id.replace('modal-', '');
+    if (id === 'caso') {
+      closeModal('caso');
+      openModal('lista');
+    } else {
+      closeModal(id);
+    }
+  });
+});
+/* Esc fecha o que estiver aberto (do caso, volta pra lista) */
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  if (document.getElementById('modal-caso').classList.contains('open')) {
+    closeModal('caso');
+    openModal('lista');
+  } else {
+    ['aviso', 'lista'].forEach(closeModal);
+  }
+});
+</script>
+
+</body>
+</html>
