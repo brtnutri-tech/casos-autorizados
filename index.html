@@ -346,6 +346,23 @@
     width: 100%;
     background: var(--color-stone-100);
   }
+  .caso-figure-empty {
+    height: 168px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--color-brand-green-50);
+    color: var(--color-brand-green-700);
+  }
+  .caso-figure-empty span {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
   .caso-text { padding: 26px 30px 30px; }
   .caso-quote {
     font-family: var(--font-display);
@@ -592,9 +609,10 @@
    Cada caso é uma situação de vida. O lead lê os botões, reconhece o dele,
    clica e abre um caso só: a foto (comparador antes/depois) e a história.
 
-   Quem TEM foto vira botão na lista. Quem ainda não tem foto fica pronto
-   aqui no código (photo: null) e aparece sozinho assim que a foto entrar
-   na pasta fotos/NN/. Pra mexer nas fotos, veja fotos/LEIA-ME.txt e me chame.
+   Todo caso com história pronta vira botão na lista. Quem ainda não tem
+   foto (photo: null) aparece com um marcador "Foto em breve" no lugar do
+   comparador. Quando a foto entrar em fotos/NN/, é só trocar o photo: null
+   pelo número da pasta. Pra mexer nas fotos, veja fotos/LEIA-ME.txt e me chame.
 
    group: "m" (mulheres), "h" (homens), "ambos" (casal, entra nos dois).
    ========================================================================= */
@@ -634,13 +652,21 @@ const cases = [
     key: "mayara", group: "m", photo: "07",
     button: "A que se viu numa foto e não se reconheceu",
     quote: "Meu sobrinho tirou uma foto, eu estava sentada e eu vi o tamanho dos meus braços, o tamanho do meu rosto. Eu falei, gente, essa não sou eu.",
-    blocks: []
+    blocks: [
+      { t: "De onde ela veio", p: "A virada da Mayara começou num susto, numa foto, sentada, quando ela se viu e não se reconheceu. Antes disso, a comida vinha muito no automático, e a tarde era o ponto fraco, aquela vontade de pão de queijo, de bolo todo dia. O que mais pesava não era a balança em si, era o medo de continuar se afastando de quem ela era. Ela já tinha tentado se cuidar antes, mas nunca tinha sido uma mudança que ficasse, sempre voltava." },
+      { t: "O que mudou", p: "A Mayara tratou a causa, não só o sintoma. Aprendeu a se organizar, deixa a comida pronta na geladeira pra não ser pega no contrapé na hora da fome. O paladar mudou, hoje comida muito gordurosa ela nem dá conta mais. E o principal, a relação com a comida deixou de ter culpa. Quando sai da linha, num fim de semana ou numa viagem, ela não chuta o balde nem se pune, volta no outro dia sem drama. Entrou na dança, faz musculação, e o cuidado virou rotina, não sacrifício." },
+      { t: "Onde ela está hoje", p: "A Mayara não vive mais na balança, ela percebe pela roupa, pelo corpo, por como ela se sente. O resultado se sustenta porque não veio de um corte radical nem de atalho, veio de hábito construído com tempo, com acerto e erro pelo caminho. Hoje ela posta uma foto e o povo pergunta o que ela fez, mas a resposta de verdade não cabe num truque. Ela aprendeu a se cuidar de um jeito que dá pra manter, e voltou a se reconhecer." }
+    ]
   },
   {
     key: "michelli", group: "m", photo: "08",
     button: "A que aprendeu a viver, não a fazer dieta",
     quote: "Fui viajar e não voltei com medo da balança. Voltei com orgulho de mim.",
-    blocks: []
+    blocks: [
+      { t: "De onde ela veio", p: "A Michelli chegou no ponto que assusta muita gente que já emagreceu, a hora de manter sem voltar atrás. O medo era esse, exagerar num fim de semana ou numa viagem e aquilo virar a porta de entrada pra perder tudo de novo. Ela ainda carregava a insegurança de quem associa um deslize a um fracasso, aquele pensamento de que, se o corpo já não aceita mais, então estragou." },
+      { t: "O que mudou", p: "A virada da Michelli foi a comida deixar de ser regra e virar escolha. Ela viajou pra um resort com tudo incluso, a armadilha clássica de quem quer comer tudo porque pagou, e não chutou o balde. Comia com variedade, salada, proteína, e ainda o pedacinho de doce que ela gosta, sem se privar e sem exagerar. Escolhia o prazer que valia a pena em vez de comer tudo no impulso. Não foi sacrifício, já era hábito instalado nela. E junto veio o movimento, ela virou corredora, treina, faz prova." },
+      { t: "Onde ela está hoje", p: "A Michelli sustenta o resultado porque parou de viver em função da dieta e passou a viver. Viaja, aproveita, come o que gosta na medida, e volta pra rotina sem medo e sem culpa. O que ela construiu não tem data pra acabar, virou o jeito dela de viver. Hoje ela olha pra trás e o que sente não é alívio de ter chegado, é orgulho de quem aprendeu a se manter." }
+    ]
   },
   {
     key: "carol-zaiden", group: "m", photo: null,
@@ -906,7 +932,7 @@ function renderLista() {
   const elH = document.getElementById('lista-homens');
   let nM = 0, nH = 0;
   cases.forEach((c) => {
-    if (!c.photo) return;                       // sem foto ainda: fica pronto, mas não aparece
+    // Todo caso com história pronta vira botão, mesmo sem foto. A foto entra depois.
     if (c.group === 'm' || c.group === 'ambos') { elM.appendChild(makeDorBtn(c)); nM++; }
     if (c.group === 'h' || c.group === 'ambos') { elH.appendChild(makeDorBtn(c)); nH++; }
   });
@@ -924,6 +950,13 @@ function openCaso(c) {
     const fig = document.createElement('div');
     fig.className = 'caso-figure';
     fig.appendChild(buildSlider(c));
+    body.appendChild(fig);
+  } else {
+    const fig = document.createElement('div');
+    fig.className = 'caso-figure caso-figure-empty';
+    fig.innerHTML = `
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      <span>Foto em breve</span>`;
     body.appendChild(fig);
   }
 
