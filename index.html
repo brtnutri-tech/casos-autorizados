@@ -507,73 +507,600 @@
     transition: opacity 320ms var(--ease-standard);
   }
   .ba-slider.touched .ba-hint { opacity: 0; }
+
+
+/* ============ PREVIEW: novo design (Editorial calmo + acentos orgânicos) ============ */
+.ec-hero{
+  position: relative;
+  padding: clamp(80px, 14vw, 180px) 24px clamp(40px, 7vw, 80px);
+  background: var(--color-stone-50);
+  color: var(--color-stone-800);
+}
+.ec-hero__inner{
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.ec-hero__eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 28px;
+}
+.ec-hero__dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-brand-green);
+  box-shadow: 0 0 0 4px rgba(128, 164, 34, 0.14);
+}
+.ec-hero__eyebrow-text{
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-stone-500);
+  font-weight: 500;
+}
+
+.ec-hero__title{
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(40px, 7vw, 84px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--color-stone-900);
+  margin: 0 0 36px;
+}
+.ec-hero__title-em{
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-brand-green-700);
+}
+
+.ec-hero__lede{
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.8vw, 21px);
+  line-height: 1.65;
+  color: var(--color-stone-600);
+  max-width: 620px;
+  margin: 0 0 64px;
+  font-weight: 400;
+}
+
+.ec-hero__scrollhint{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ec-hero__scrollword{
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-stone-500);
+  font-weight: 500;
+}
+.ec-hero__scrollline{
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: var(--color-stone-300);
+  position: relative;
+  overflow: hidden;
+}
+.ec-hero__scrollline::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-brand-green);
+  transform: translateX(-100%);
+  animation: ec-scrollline 2.6s cubic-bezier(.4,0,.2,1) infinite;
+}
+@keyframes ec-scrollline{
+  0%   { transform: translateX(-100%); }
+  55%  { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+.ec-hero__curve{
+  display: block;
+  width: 100%;
+  height: 50px;
+  margin-top: clamp(40px, 6vw, 70px);
+  opacity: 0.55;
+}
+
+@media (max-width: 640px){
+  .ec-hero{ padding-top: 72px; }
+  .ec-hero__title{ font-size: clamp(36px, 9vw, 48px); }
+}
+
+.ec-aviso{
+  background: var(--color-brand-green-50, #f3f6e8);
+  padding: clamp(48px, 7vw, 88px) 24px;
+}
+.ec-aviso__inner{
+  max-width: 720px;
+  margin: 0 auto;
+  border-left: 2px solid var(--color-brand-green);
+  padding: 8px 0 8px 28px;
+}
+.ec-aviso__eyebrow{
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-brand-green-700);
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+.ec-aviso__title{
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  color: var(--color-stone-900);
+  margin: 0 0 24px;
+}
+.ec-aviso__text{
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.55vw, 18px);
+  line-height: 1.7;
+  color: var(--color-stone-700);
+  margin: 0 0 14px;
+  font-weight: 400;
+}
+.ec-aviso__text:last-child{ margin-bottom: 0; }
+
+@media (max-width: 600px){
+  .ec-aviso__inner{ padding-left: 20px; }
+}
+
+.ec-list{
+  background: var(--color-stone-50);
+  padding: clamp(60px, 10vw, 120px) 24px clamp(80px, 12vw, 160px);
+}
+.ec-list__inner{
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.ec-group{
+  margin-bottom: clamp(56px, 8vw, 96px);
+}
+.ec-group:last-of-type{
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+.ec-group__head{
+  margin-bottom: clamp(32px, 5vw, 56px);
+  max-width: 640px;
+}
+.ec-group__eyebrow{
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-brand-green-700);
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+.ec-group__title{
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  color: var(--color-stone-900);
+  margin: 0 0 18px;
+}
+.ec-group__rule{
+  width: 48px;
+  height: 2px;
+  background: var(--color-brand-green);
+  border-radius: 2px;
+}
+
+.ec-entries{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-stone-200);
+}
+.ec-entry{
+  border-bottom: 1px solid var(--color-stone-200);
+}
+
+.ec-group__divider{
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin: clamp(32px, 5vw, 56px) 0 clamp(40px, 6vw, 64px);
+  opacity: 0.7;
+}
+
+.ec-foot{
+  margin-top: clamp(48px, 6vw, 80px);
+  padding-top: 32px;
+  border-top: 1px solid var(--color-stone-200);
+  text-align: center;
+}
+.ec-foot__text{
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--color-stone-500);
+  margin: 0;
+}
+
+/* Base: thumb retrato 3:4, foto inteira, sem corte */
+.ec-entry__thumb{
+  aspect-ratio: 3 / 4;
+  flex-shrink: 0;
+  position: relative;
+}
+.ec-entry__thumb img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Aparência polaroid (moldura branca, levíssima rotação) */
+.ec-entry__thumb{
+  width: 42px;
+  padding: 3px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(20,19,15,0.14), 0 1px 2px rgba(20,19,15,0.06);
+  transform: rotate(-2.5deg);
+  transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .35s cubic-bezier(.4,0,.2,1);
+}
+.ec-entry__thumb img{ border-radius: 2px; }
+.ec-entry__btn:hover .ec-entry__thumb,
+.ec-entry__btn:focus-visible .ec-entry__thumb{
+  transform: rotate(0deg) scale(1.06);
+  box-shadow: 0 6px 14px rgba(20,19,15,0.18), 0 2px 4px rgba(20,19,15,0.08);
+}
+
+.ec-entry__btn{
+  position: relative;
+  display: grid;
+  grid-template-columns: 50px 1fr 32px;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: clamp(22px, 2.6vw, 32px) 4px;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-display);
+  color: var(--color-stone-800);
+  transition: transform .45s cubic-bezier(.2,.7,.2,1), color .25s cubic-bezier(.4,0,.2,1);
+  outline: none;
+}
+.ec-entry__btn::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-brand-green);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1);
+}
+
+.ec-entry__num{
+  font-family: var(--font-body);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--color-stone-300);
+  font-weight: 600;
+  padding-top: 6px;
+  transition: color .25s cubic-bezier(.4,0,.2,1);
+}
+
+.ec-entry__phrase{
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  color: var(--color-stone-800);
+  transition: color .25s cubic-bezier(.4,0,.2,1);
+}
+
+.ec-entry__chev{
+  justify-self: end;
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 28px;
+  color: var(--color-stone-300);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .3s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.2,.7,.2,1), color .25s cubic-bezier(.4,0,.2,1);
+  line-height: 1;
+}
+
+.ec-entry__btn:hover,
+.ec-entry__btn:focus-visible{
+  transform: translateX(10px);
+}
+.ec-entry__btn:hover .ec-entry__phrase,
+.ec-entry__btn:focus-visible .ec-entry__phrase{
+  color: var(--color-brand-green-700);
+}
+.ec-entry__btn:hover .ec-entry__num,
+.ec-entry__btn:focus-visible .ec-entry__num{
+  color: var(--color-brand-green-700);
+}
+.ec-entry__btn:hover .ec-entry__chev,
+.ec-entry__btn:focus-visible .ec-entry__chev{
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--color-brand-green-700);
+}
+.ec-entry__btn:hover::before,
+.ec-entry__btn:focus-visible::before{
+  transform: scaleY(1);
+}
+.ec-entry__btn:focus-visible{
+  background: rgba(128, 164, 34, 0.06);
+  border-radius: 4px;
+}
+
+@media (max-width: 600px){
+  .ec-entry__btn{
+    grid-template-columns: 40px 1fr 24px;
+    gap: 14px;
+    padding: 22px 4px;
+  }
+  .ec-entry__chev{
+    opacity: 1;
+    transform: translateX(0);
+    font-size: 22px;
+  }
+}
+
+/* Reveal padrão pra qualquer bloco marcado com data-reveal */
+[data-reveal]{
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger dentro das listas de dores */
+.ec-entries [data-reveal]{
+  transition-delay: calc(var(--ec-i, 0) * 55ms);
+}
+
+/* Acessibilidade: respeita preferência de menos movimento */
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .ec-hero__scrollline::after{
+    animation: none;
+  }
+  .ec-entry__btn,
+  .ec-entry__btn::before,
+  .ec-entry__phrase,
+  .ec-entry__num,
+  .ec-entry__chev{
+    transition: none;
+  }
+}
+
 </style>
 </head>
 <body>
+<section class="ec-hero">
+  <div class="ec-hero__inner">
+    <div class="ec-hero__eyebrow">
+      <span class="ec-hero__dot" aria-hidden="true"></span>
+      <span class="ec-hero__eyebrow-text">Histórias reais, autorizadas uma a uma</span>
+    </div>
 
-<section class="section">
-  <div class="container-page">
-    <div class="section-head center">
-      <div class="eyebrow"><span class="line"></span>Resultados reais</div>
-      <h2>Pessoas reais.</h2>
+    <h1 class="ec-hero__title">
+      Antes de decidir,<br>
+      <span class="ec-hero__title-em">leia quem já passou</span><br>
+      por onde você está passando.
+    </h1>
+
+    <p class="ec-hero__lede">
+      Pessoas que chegaram cansadas, com tentativas frustradas nas costas, e topam contar como foi por dentro. Sem promessa, sem roteiro. Só o que aconteceu, do jeito que aconteceu.
+    </p>
+
+    <div class="ec-hero__scrollhint" aria-hidden="true">
+      <span class="ec-hero__scrollword">role a página</span>
+      <span class="ec-hero__scrollline"></span>
     </div>
-    <div class="cases-cta-wrap">
-      <button id="open-aviso" type="button" class="btn btn-outline">
-        Ver casos autorizados
-      </button>
-    </div>
+  </div>
+
+  <svg class="ec-hero__curve" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C200,10 400,55 600,30 C800,8 1000,50 1200,25" fill="none" stroke="var(--color-brand-green)" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+</section>
+
+<section class="ec-aviso" aria-label="Aviso antes da leitura" data-reveal>
+  <div class="ec-aviso__inner">
+    <p class="ec-aviso__eyebrow">Antes de continuar</p>
+    <h2 class="ec-aviso__title">Antes de você ver as fotos, leia.</h2>
+    <p class="ec-aviso__text">
+      Cada paciente aqui tem uma história diferente da sua. Não compare. Ninguém mudou do dia pra noite, e nenhum resultado veio sem tempo, processo, acerto e erro. Não tem milagre nem atalho.
+    </p>
+    <p class="ec-aviso__text">
+      A foto mostra só o que se vê por fora. Mas o que mudou em cada um foi o sono, o intestino, a disposição, a paz com a comida. O resultado de verdade está em coisas que a câmera não pega.
+    </p>
   </div>
 </section>
 
-<!-- Modal de aviso -->
-<div class="modal-backdrop" id="modal-aviso">
-  <div class="modal" role="dialog" aria-modal="true">
-    <button class="modal-close" data-close="aviso" aria-label="Fechar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      <span>Fechar</span>
-    </button>
-    <h3 class="aviso-headline">Antes de você ver as fotos, leia.</h3>
-    <p>
-      Cada paciente aqui tem uma história diferente da sua. Não compare.
-      Ninguém mudou do dia pra noite, e nenhum resultado veio sem tempo,
-      processo, acerto e erro. Não tem milagre nem atalho.
-    </p>
-    <p>
-      A foto mostra só o que se vê por fora. Mas o que mudou em cada um foi
-      o sono, o intestino, a disposição, a paz com a comida. O resultado de
-      verdade está em coisas que a câmera não pega.
-    </p>
-    <p class="aviso-question">Entendido?</p>
-    <div class="modal-actions">
-      <button type="button" class="btn btn-green btn-block btn-lg" id="proceed-cases">
-        Sim, ficou claro!
-      </button>
-    </div>
+<section class="ec-list" aria-label="Lista de histórias">
+  <div class="ec-list__inner">
+
+    <article class="ec-group" data-reveal>
+      <header class="ec-group__head">
+        <p class="ec-group__eyebrow">Mulheres</p>
+        <h2 class="ec-group__title">Histórias do que se anula, se cansa, se cobra.</h2>
+        <div class="ec-group__rule" aria-hidden="true"></div>
+      </header>
+
+      <ol class="ec-entries" role="list">
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="01" onclick="openCasoByKey('01')">
+            <span class="ec-entry__thumb"><img src="fotos/01/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que se esqueceu de si pra cuidar de quem amava</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="03" onclick="openCasoByKey('03')">
+            <span class="ec-entry__thumb"><img src="fotos/03/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que emagreceu com a caneta e tinha medo de voltar tudo</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="04" onclick="openCasoByKey('04')">
+            <span class="ec-entry__thumb"><img src="fotos/04/lado-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que parou de buscar dieta e começou a aprender</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="05" onclick="openCasoByKey('05')">
+            <span class="ec-entry__thumb"><img src="fotos/05/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que sabia treinar e fazer dieta, mas vivia no tudo ou nada</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="07" onclick="openCasoByKey('07')">
+            <span class="ec-entry__thumb"><img src="fotos/07/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que se viu numa foto e não se reconheceu</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="08" onclick="openCasoByKey('08')">
+            <span class="ec-entry__thumb"><img src="fotos/08/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que aprendeu a viver, não a fazer dieta</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="10" onclick="openCasoByKey('10')">
+            <span class="ec-entry__thumb"><img src="fotos/10/costas-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que comia certo mas não sabia o quanto</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="11" onclick="openCasoByKey('11')">
+            <span class="ec-entry__thumb"><img src="fotos/11/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que comia pra dar conta da ansiedade</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="13" onclick="openCasoByKey('13')">
+            <span class="ec-entry__thumb"><img src="fotos/13/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">A que descobriu que o difícil não é chegar, é sustentar</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="15" onclick="openCasoByKey('15')">
+            <span class="ec-entry__thumb"><img src="fotos/15/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">Os dois que fizeram juntos e um sustentou o outro</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+      </ol>
+    </article>
+
+    <svg class="ec-group__divider" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true" data-reveal>
+      <path d="M0,20 C300,5 500,35 700,18 C900,4 1050,30 1200,20" fill="none" stroke="var(--color-stone-300)" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+
+    <article class="ec-group" data-reveal>
+      <header class="ec-group__head">
+        <p class="ec-group__eyebrow">Homens</p>
+        <h2 class="ec-group__title">Histórias do que se cala, se posterga, se aguenta.</h2>
+        <div class="ec-group__rule" aria-hidden="true"></div>
+      </header>
+
+      <ol class="ec-entries" role="list">
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="02" onclick="openCasoByKey('02')">
+            <span class="ec-entry__thumb"><img src="fotos/02/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">O que recebia lista de nutricionista e nada encaixava na vida dele</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="06" onclick="openCasoByKey('06')">
+            <span class="ec-entry__thumb"><img src="fotos/06/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">O que achava que rotina puxada e dieta não combinavam</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="09" onclick="openCasoByKey('09')">
+            <span class="ec-entry__thumb"><img src="fotos/09/lado-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">O que era magro, mas tinha gordura abdominal alta</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="12" onclick="openCasoByKey('12')">
+            <span class="ec-entry__thumb"><img src="fotos/12/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">O que emagrecia na base do sacrifício e voltava tudo</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="14" onclick="openCasoByKey('14')">
+            <span class="ec-entry__thumb"><img src="fotos/14/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">O que achava que emagrecer era viver de salada e carne</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+        <li class="ec-entry" data-reveal>
+          <button class="ec-entry__btn" type="button" data-caso="15" onclick="openCasoByKey('15')">
+            <span class="ec-entry__thumb"><img src="fotos/15/frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__phrase">Os dois que fizeram juntos e um sustentou o outro</span>
+            <span class="ec-entry__chev" aria-hidden="true">›</span>
+          </button>
+        </li>
+      </ol>
+    </article>
+
+    <footer class="ec-foot" data-reveal>
+      <p class="ec-foot__text">Quando terminar, volte pra conversa de onde parou. Sem pressa.</p>
+    </footer>
+
   </div>
+</section>
+
+
+
 </div>
 
-<!-- Modal lista de casos -->
-<div class="modal-backdrop" id="modal-lista">
-  <div class="modal lista" role="dialog" aria-modal="true">
-    <button class="modal-close" data-close="lista" aria-label="Fechar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      <span>Fechar</span>
-    </button>
-    <div class="lista-body">
-      <div class="lista-head">
-        <h3>Qual dessas histórias parece a sua?</h3>
-        <p>Toque na situação que mais bate com o que você viveu. Você abre um caso por vez.</p>
-      </div>
-      <div class="lista-group" id="grupo-mulheres">
-        <div class="lista-group-title">Mulheres</div>
-        <div class="dor-list" id="lista-mulheres"></div>
-      </div>
-      <div class="lista-group" id="grupo-homens">
-        <div class="lista-group-title">Homens</div>
-        <div class="dor-list" id="lista-homens"></div>
-      </div>
-    </div>
-  </div>
+</div>
 </div>
 
 <!-- Modal de um caso -->
@@ -983,29 +1510,6 @@ function attachSlider(slider) {
   }
 }
 
-/* ---------- Lista de botões ---------- */
-function makeDorBtn(c) {
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'dor-btn';
-  btn.innerHTML = `<span>${c.btn}</span><span class="dor-arrow" aria-hidden="true">${arrowSVG}</span>`;
-  btn.addEventListener('click', () => openCaso(c));
-  return btn;
-}
-
-function renderLista() {
-  const elM = document.getElementById('lista-mulheres');
-  const elH = document.getElementById('lista-homens');
-  let nM = 0, nH = 0;
-  cases.forEach((c) => {
-    if (!c.ph || !c.ph.length) return;
-    if (c.g === 'm' || c.g === 'ambos') { elM.appendChild(makeDorBtn(c)); nM++; }
-    if (c.g === 'h' || c.g === 'ambos') { elH.appendChild(makeDorBtn(c)); nH++; }
-  });
-  if (nM === 0) document.getElementById('grupo-mulheres').style.display = 'none';
-  if (nH === 0) document.getElementById('grupo-homens').style.display = 'none';
-}
-
 /* ---------- Abre um caso ---------- */
 function openCaso(c) {
   const body = document.getElementById('caso-body');
@@ -1038,7 +1542,6 @@ function openCaso(c) {
     body.appendChild(more);
   }
 
-  closeModal('lista');
   openModal('caso');
   body.scrollTop = 0;
 }
@@ -1049,45 +1552,47 @@ function openModal(id) {
   document.body.style.overflow = 'hidden';
 }
 function closeModal(id) {
-  document.getElementById('modal-' + id).classList.remove('open');
+  const el = document.getElementById('modal-' + id);
+  if (el) el.classList.remove('open');
   if (!document.querySelector('.modal-backdrop.open')) {
     document.body.style.overflow = '';
   }
 }
 
-renderLista();
 
-document.getElementById('open-aviso').addEventListener('click', () => openModal('aviso'));
-document.getElementById('proceed-cases').addEventListener('click', () => {
-  closeModal('aviso');
-  openModal('lista');
-});
-document.getElementById('caso-back').addEventListener('click', () => {
-  closeModal('caso');
-  openModal('lista');
-});
+
+// Botão "Voltar" do caso: como a lista agora é inline, só fecha o modal (deixa o scroll onde estava)
+document.getElementById('caso-back').addEventListener('click', () => closeModal('caso'));
+
+// Wrapper pra os botões inline da lista (a lista chama openCasoByKey('01'), eu procuro o caso e abro)
+function openCasoByKey(key) {
+  const c = cases.find(x => x.key === key);
+  if (c) openCaso(c);
+}
+
+// Reveal on scroll + stagger dentro da lista
+(function(){
+  document.querySelectorAll('.ec-entries').forEach(list => {
+    list.querySelectorAll('[data-reveal]').forEach((el, i) => el.style.setProperty('--ec-i', i));
+  });
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
+  }
+})();
 document.querySelectorAll('[data-close]').forEach((btn) => {
   btn.addEventListener('click', () => closeModal(btn.dataset.close));
 });
 document.querySelectorAll('.modal-backdrop').forEach((bd) => {
-  bd.addEventListener('click', (e) => {
-    if (e.target !== bd) return;
-    const id = bd.id.replace('modal-', '');
-    if (id === 'caso') {
-      closeModal('caso');
-      openModal('lista');
-    } else {
-      closeModal(id);
-    }
-  });
+  bd.addEventListener('click', (e) => { if (e.target === bd) closeModal(bd.id.replace('modal-', '')); });
 });
 document.addEventListener('keydown', (e) => {
-  if (e.key !== 'Escape') return;
-  if (document.getElementById('modal-caso').classList.contains('open')) {
+  if (e.key === 'Escape' && document.getElementById('modal-caso').classList.contains('open')) {
     closeModal('caso');
-    openModal('lista');
-  } else {
-    ['aviso', 'lista'].forEach(closeModal);
   }
 });
 </script>
