@@ -669,13 +669,14 @@ const cases = [
     ]
   },
   {
-    key: "05", g: "m", single: true,
+    key: "05", g: "m",
     btn: "A que sabia treinar e fazer dieta, mas vivia no tudo ou nada",
     q: "Hoje eu consigo passar uma semana sem dieta e na semana seguinte voltar como se nada tivesse acontecido.",
     ph: [
-      { src: "fotos/05/frente.webp" },
-      { src: "fotos/05/lado.webp" },
-      { src: "fotos/05/lado2.webp" }
+      { a: "Frente", b: "fotos/05/frente-antes.webp", d: "fotos/05/frente-depois.webp" },
+      { src: "fotos/05/comp-1.webp" },
+      { src: "fotos/05/comp-2.webp" },
+      { src: "fotos/05/comp-3.webp" }
     ],
     bl: [
       ["De onde ela veio", "Ela nunca teve dificuldade com disciplina. Sabe treinar, sabe seguir a dieta, faz a marmita, leva a quantidade certa, não enjoa de comer comida de verdade. O que faltava não era força de vontade, era equilíbrio. Vivia na lógica do oito ou oitenta, ou estava cem por cento na linha, ou tinha saído dela. Não existia meio termo. E sempre que saía, vinha o peso na consciência, porque a relação com o doce ainda carregava o medo de voltar a ser o que era."],
@@ -873,13 +874,13 @@ function buildSlider(before, after) {
 }
 
 /* ---------- Bloco de foto do caso (comparador ou imagem única) ---------- */
-function buildPhoto(p, single) {
+function buildPhoto(p) {
   const fig = document.createElement('div');
   fig.className = 'caso-figure';
-  if (single) {
+  if (p.src) {                       // imagem única (sem barrinha)
     fig.classList.add('single');
     fig.innerHTML = `<img src="${p.src}" alt="" decoding="async" draggable="false">`;
-  } else {
+  } else {                           // comparador antes/depois
     fig.appendChild(buildSlider(p.b, p.d));
   }
   return fig;
@@ -1009,10 +1010,9 @@ function renderLista() {
 function openCaso(c) {
   const body = document.getElementById('caso-body');
   body.innerHTML = '';
-  const single = !!c.single;
 
   // Foto do topo (a primeira da lista)
-  if (c.ph && c.ph.length) body.appendChild(buildPhoto(c.ph[0], single));
+  if (c.ph && c.ph.length) body.appendChild(buildPhoto(c.ph[0]));
 
   // Texto: citação + blocos
   const text = document.createElement('div');
@@ -1027,13 +1027,14 @@ function openCaso(c) {
 
   // Outros ângulos na sequência
   if (c.ph && c.ph.length > 1) {
+    const trailing = c.ph.slice(1);
     const label = document.createElement('div');
     label.className = 'caso-more-label';
-    label.textContent = single ? 'Mais fotos' : 'Mais ângulos';
+    label.textContent = trailing.every((p) => p.src) ? 'Mais fotos' : 'Mais ângulos';
     body.appendChild(label);
     const more = document.createElement('div');
     more.className = 'caso-more';
-    c.ph.slice(1).forEach((p) => more.appendChild(buildPhoto(p, single)));
+    trailing.forEach((p) => more.appendChild(buildPhoto(p)));
     body.appendChild(more);
   }
 
