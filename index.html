@@ -11,6 +11,8 @@
 <style>
   :root {
     --color-brand-green: #80A422;
+    --color-brand-red: #C13B2E;
+    --color-brand-red-rgb: 193, 59, 46;
     --color-brand-green-50: #F5F7E8;
     --color-brand-green-500: #80A422;
     --color-brand-green-600: #6E8F1D;
@@ -368,10 +370,51 @@
     font-family: var(--font-body);
     font-size: 12px;
     font-weight: 700;
+    font-style: italic;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: var(--color-stone-500);
+    margin-bottom: 9px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+  /* Primeiro bloco "De onde..." em vermelho da marca com dot pulsando */
+  .caso-block:first-of-type .caso-block-title {
+    color: var(--color-brand-red);
+  }
+  .caso-block:first-of-type .caso-block-title::before {
+    content: "";
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--color-brand-red);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(var(--color-brand-red-rgb), 0.55);
+    animation: caso-dot-pulse-red 1.9s ease-in-out infinite;
+  }
+  /* Último bloco "Onde está hoje" em verde da marca com dot pulsando */
+  .caso-block:last-of-type .caso-block-title {
     color: var(--color-brand-green-700);
-    margin-bottom: 7px;
+  }
+  .caso-block:last-of-type .caso-block-title::before {
+    content: "";
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--color-brand-green);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(128, 164, 34, 0.55);
+    animation: caso-dot-pulse-green 1.9s ease-in-out infinite;
+  }
+  @keyframes caso-dot-pulse-red {
+    0%   { box-shadow: 0 0 0 0 rgba(var(--color-brand-red-rgb), 0.55); }
+    70%  { box-shadow: 0 0 0 10px rgba(var(--color-brand-red-rgb), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--color-brand-red-rgb), 0); }
+  }
+  @keyframes caso-dot-pulse-green {
+    0%   { box-shadow: 0 0 0 0 rgba(128, 164, 34, 0.55); }
+    70%  { box-shadow: 0 0 0 10px rgba(128, 164, 34, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(128, 164, 34, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .caso-block-title::before { animation: none !important; }
   }
   .caso-block p {
     margin: 0;
