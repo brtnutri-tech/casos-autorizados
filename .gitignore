@@ -1,5 +1,10 @@
 # Material interno que NÃO deve ir pra internet (fica só no seu Mac)
 fotos/Cases/
+fotos/Material para contexto antes e depois/
+
+# Pastas-fonte com NOME real do paciente (ex: "01 - Carol Castro").
+# As fotos publicadas ficam nas pastas numeradas sem nome (fotos/01, fotos/02...).
+fotos/*[0-9] - *
 
 # Config local do preview (não precisa ir pro repositório)
 .claude/
