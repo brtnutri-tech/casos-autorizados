@@ -21,34 +21,28 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..800&family=Source+Sans+3:wght@300..700&display=swap">
 </noscript>
 
-<!-- ===========================================================
-     COMPARADOR DE MINIATURAS (temporario, so pra decidir o visual)
-     A pagina normal continua igual. Pra comparar as opcoes, abra
-     a URL com  ?comparar=1  no fim. Quando bater o martelo, eu
-     apago este bloco e deixo so a versao escolhida.
-     =========================================================== -->
-<style id="variantes-miniatura">
-/* ---------- base comum ---------- */
+<style id="miniatura-polaroids">
+/* ===========================================================
+   MINIATURA DA LISTA: duas polaroids (antes atras, depois na frente)
+   Entrada em leque: as duas chegam empilhadas no meio e se abrem,
+   como quem joga duas fotos na mesa. Acontece uma vez, quando o
+   caso entra na tela, e funciona no celular (nao depende de hover).
+   =========================================================== */
 .ec-entry__thumb{
   position: relative;
+  width: 118px;
   aspect-ratio: 3 / 4;
   flex-shrink: 0;
-  background: none;
-  padding: 0;
-  box-shadow: none;
-  border-radius: 0;
-  transform: none;
-  transition: width .35s cubic-bezier(.2,.7,.2,1);
 }
 .t-card{
-  position: absolute; inset: 0;
+  position: absolute; top: 0; bottom: 0;
+  width: 74px;
   padding: 3px;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(20,19,15,.14), 0 1px 2px rgba(20,19,15,.06);
-  transition: transform .4s cubic-bezier(.2,.7,.2,1),
-              box-shadow .35s cubic-bezier(.4,0,.2,1),
-              opacity .55s ease;
+  transition: transform .45s cubic-bezier(.2,.7,.2,1),
+              box-shadow .35s cubic-bezier(.4,0,.2,1);
 }
 .t-card img{
   width: 100%; height: 100%;
@@ -56,101 +50,67 @@
   border-radius: 2px;
 }
 
-/* ---------- ATUAL (o que o lead ve hoje) ---------- */
-body.v-atual .ec-entry__thumb{ width: 42px; }
-body.v-atual .t-card-antes { transform: rotate(-2.5deg); }
-body.v-atual .t-card-depois{ display: none; }
-body.v-atual .ec-entry__btn:hover .t-card-antes,
-body.v-atual .ec-entry__btn:focus-visible .t-card-antes{
-  transform: rotate(0deg) scale(1.06);
-  box-shadow: 0 6px 14px rgba(20,19,15,.18), 0 2px 4px rgba(20,19,15,.08);
-}
-
-/* ---------- A: polaroid grande que vira o depois ---------- */
-body.v-a .ec-entry__thumb{ width: 96px; }
-body.v-a .t-card{ transform: rotate(-2.5deg); }
-body.v-a .t-card-depois{ opacity: 0; animation: t-vira 7s ease-in-out infinite; }
-@keyframes t-vira{ 0%,40%{opacity:0} 55%,90%{opacity:1} 100%{opacity:0} }
-body.v-a .ec-entry:nth-child(3n+2) .t-card-depois{ animation-delay: -2.4s; }
-body.v-a .ec-entry:nth-child(3n+3) .t-card-depois{ animation-delay: -4.8s; }
-body.v-a .ec-entry__btn:hover .t-card,
-body.v-a .ec-entry__btn:focus-visible .t-card{
-  transform: rotate(0deg) scale(1.05);
-  box-shadow: 0 8px 18px rgba(20,19,15,.2), 0 2px 5px rgba(20,19,15,.09);
-}
-body.v-a .ec-entry__btn:hover .t-card-depois{ animation: none; opacity: 1; }
-
-/* ---------- B: duas polaroids, antes atras e depois na frente ---------- */
-body.v-b .ec-entry__thumb{ width: 118px; }
-body.v-b .t-card{ width: 74px; }
-body.v-b .t-card-antes{
-  left: 0; right: auto;
+/* --- posicao de repouso --- */
+.t-card-antes{
+  left: 0;
   transform: rotate(-6deg) translateY(3px) scale(.92);
   filter: saturate(.85);
   z-index: 1;
 }
-body.v-b .t-card-depois{
-  left: auto; right: 0;
+.t-card-depois{
+  right: 0;
   transform: rotate(3.5deg);
   z-index: 2;
 }
-body.v-b .ec-entry__btn:hover .t-card-antes{
+
+/* --- entrada em leque (segue o mesmo escalonamento do reveal da lista) --- */
+.ec-entry[data-reveal]:not(.is-visible) .t-card{ opacity: 0; }
+.ec-entry.is-visible .t-card-antes{
+  animation: leque-antes .8s cubic-bezier(.2,.8,.25,1) both;
+  animation-delay: calc(var(--ec-i, 0) * 55ms + 90ms);
+}
+.ec-entry.is-visible .t-card-depois{
+  animation: leque-depois .8s cubic-bezier(.2,.8,.25,1) both;
+  animation-delay: calc(var(--ec-i, 0) * 55ms + 210ms);
+}
+/* quando as fotos pousam, devolve o controle pro CSS normal (hover volta a funcionar) */
+.ec-entry.pousou .t-card{ animation: none !important; opacity: 1; }
+
+@keyframes leque-antes{
+  from{ transform: translateX(20px) rotate(0deg) scale(.88); opacity: 0; }
+  to  { transform: rotate(-6deg) translateY(3px) scale(.92); opacity: 1; }
+}
+@keyframes leque-depois{
+  from{ transform: translateX(-20px) rotate(0deg) scale(.88); opacity: 0; }
+  to  { transform: rotate(3.5deg); opacity: 1; }
+}
+
+/* --- hover no computador --- */
+.ec-entry__btn:hover .t-card-antes,
+.ec-entry__btn:focus-visible .t-card-antes{
   transform: rotate(-9deg) translateX(-5px) translateY(2px) scale(.94);
 }
-body.v-b .ec-entry__btn:hover .t-card-depois{
+.ec-entry__btn:hover .t-card-depois,
+.ec-entry__btn:focus-visible .t-card-depois{
   transform: rotate(2deg) translateX(4px) scale(1.04);
   box-shadow: 0 8px 18px rgba(20,19,15,.2), 0 2px 5px rgba(20,19,15,.09);
 }
 
-/* ---------- C: polaroid grande so do depois ---------- */
-body.v-c .ec-entry__thumb{ width: 96px; }
-body.v-c .t-card-antes { display: none; }
-body.v-c .t-card-depois{ transform: rotate(-2.5deg); }
-body.v-c .ec-entry__btn:hover .t-card-depois,
-body.v-c .ec-entry__btn:focus-visible .t-card-depois{
-  transform: rotate(0deg) scale(1.05);
-  box-shadow: 0 8px 18px rgba(20,19,15,.2), 0 2px 5px rgba(20,19,15,.09);
+/* --- toque no celular: as duas se juntam de leve enquanto o dedo esta apertado --- */
+.ec-entry__btn:active .t-card-antes{
+  transform: rotate(-4deg) translateX(4px) translateY(2px) scale(.93);
+}
+.ec-entry__btn:active .t-card-depois{
+  transform: rotate(2deg) translateX(-3px) scale(1.02);
 }
 
-@media (prefers-reduced-motion: reduce){
-  body.v-a .t-card-depois{ animation: none; opacity: 0; }
-  body.v-a .ec-entry__btn:hover .t-card-depois{ opacity: 1; }
-}
-
-/* ---------- barra do comparador (so aparece com ?comparar=1) ---------- */
-#seletor-miniatura{
-  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
-  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(20,19,15,.12);
-  font-family: var(--font-body);
-  box-shadow: 0 2px 10px rgba(20,19,15,.06);
-}
-#seletor-miniatura b{
-  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
-  color: #6b6a63; font-weight: 700; margin-right: 4px;
-}
-#seletor-miniatura button{
-  font: inherit; font-size: 13px; font-weight: 600;
-  padding: 7px 13px; border-radius: 999px;
-  border: 1px solid rgba(20,19,15,.18);
-  background: #fff; color: #3a3934; cursor: pointer;
-  transition: all .18s ease;
-}
-#seletor-miniatura button:hover{ border-color: var(--color-brand-green); color: #5f7d16; }
-#seletor-miniatura button[aria-pressed="true"]{
-  background: var(--color-brand-green); border-color: var(--color-brand-green); color: #fff;
-}
-body.comparando{ padding-top: 56px; }
 @media (max-width: 640px){
-  #seletor-miniatura{ gap: 6px; padding: 8px 10px; }
-  #seletor-miniatura button{ padding: 6px 10px; font-size: 12px; }
-  #seletor-miniatura b{ width: 100%; margin-bottom: 2px; }
-  body.comparando{ padding-top: 84px; }
-  body.v-b .ec-entry__thumb{ width: 104px; }
-  body.v-b .t-card{ width: 66px; }
+  .ec-entry__thumb{ width: 104px; }
+  .t-card{ width: 66px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .ec-entry.is-visible .t-card{ animation: none !important; opacity: 1; }
+  .t-card{ transition: none; }
 }
 </style>
 <style>
@@ -952,39 +912,13 @@ body.comparando{ padding-top: 56px; }
 .ec-foot__cta:active{ transform: translateY(0); }
 .ec-foot__cta svg{ display:block; }
 
-/* Base: thumb retrato 3:4, foto inteira, sem corte */
-.ec-entry__thumb{
-  aspect-ratio: 3 / 4;
-  flex-shrink: 0;
-  position: relative;
-}
-.ec-entry__thumb img{
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Aparência polaroid (moldura branca, levíssima rotação) */
-.ec-entry__thumb{
-  width: 42px;
-  padding: 3px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 6px rgba(20,19,15,0.14), 0 1px 2px rgba(20,19,15,0.06);
-  transform: rotate(-2.5deg);
-  transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .35s cubic-bezier(.4,0,.2,1);
-}
-.ec-entry__thumb img{ border-radius: 2px; }
-.ec-entry__btn:hover .ec-entry__thumb,
-.ec-entry__btn:focus-visible .ec-entry__thumb{
-  transform: rotate(0deg) scale(1.06);
-  box-shadow: 0 6px 14px rgba(20,19,15,0.18), 0 2px 4px rgba(20,19,15,0.08);
-}
+/* A miniatura da lista (duas polaroids) esta no bloco #miniatura-polaroids,
+   la em cima no <head>. */
 
 .ec-entry__btn{
   position: relative;
   display: grid;
-  grid-template-columns: 50px 1fr 32px;
+  grid-template-columns: 124px 1fr 32px;  /* 1a coluna = largura das duas polaroids */
   align-items: center;
   gap: 20px;
   width: 100%;
@@ -1075,7 +1009,7 @@ body.comparando{ padding-top: 56px; }
 
 @media (max-width: 600px){
   .ec-entry__btn{
-    grid-template-columns: 40px 1fr 24px;
+    grid-template-columns: 110px 1fr 24px;  /* idem, no celular */
     gap: 14px;
     padding: 22px 4px;
   }
@@ -1175,70 +1109,70 @@ body.comparando{ padding-top: 56px; }
       <ol class="ec-entries" role="list">
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="01" onclick="openCasoByKey('01')">
-            <span class="ec-entry__thumb"><img src="fotos/01/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/01/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/01/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que se esqueceu de si pra cuidar de quem amava</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="03" onclick="openCasoByKey('03')">
-            <span class="ec-entry__thumb"><img src="fotos/03/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/03/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/03/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que emagreceu com a caneta e tinha medo de voltar tudo</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="04" onclick="openCasoByKey('04')">
-            <span class="ec-entry__thumb"><img src="fotos/04/thumb-lado-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/04/thumb-lado-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/04/thumb-lado-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que parou de buscar dieta e começou a aprender</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="05" onclick="openCasoByKey('05')">
-            <span class="ec-entry__thumb"><img src="fotos/05/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/05/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/05/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que sabia treinar e fazer dieta, mas vivia no tudo ou nada</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="07" onclick="openCasoByKey('07')">
-            <span class="ec-entry__thumb"><img src="fotos/07/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/07/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/07/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que se viu numa foto e não se reconheceu</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="08" onclick="openCasoByKey('08')">
-            <span class="ec-entry__thumb"><img src="fotos/08/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/08/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/08/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que aprendeu a viver, não a fazer dieta</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="10" onclick="openCasoByKey('10')">
-            <span class="ec-entry__thumb"><img src="fotos/10/thumb-costas-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/10/thumb-costas-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/10/thumb-costas-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que comia certo mas não sabia o quanto</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="11" onclick="openCasoByKey('11')">
-            <span class="ec-entry__thumb"><img src="fotos/11/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/11/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/11/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que comia pra dar conta da ansiedade</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="13" onclick="openCasoByKey('13')">
-            <span class="ec-entry__thumb"><img src="fotos/13/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/13/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/13/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">A que descobriu que o difícil não é chegar, é sustentar</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="15" onclick="openCasoByKey('15')">
-            <span class="ec-entry__thumb"><img src="fotos/15/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/15/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/15/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">Os dois que fizeram juntos e um sustentou o outro</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
@@ -1261,42 +1195,42 @@ body.comparando{ padding-top: 56px; }
       <ol class="ec-entries" role="list">
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="02" onclick="openCasoByKey('02')">
-            <span class="ec-entry__thumb"><img src="fotos/02/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/02/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/02/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">O que recebia lista de nutricionista e nada encaixava na vida dele</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="06" onclick="openCasoByKey('06')">
-            <span class="ec-entry__thumb"><img src="fotos/06/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/06/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/06/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">O que achava que rotina puxada e dieta não combinavam</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="09" onclick="openCasoByKey('09')">
-            <span class="ec-entry__thumb"><img src="fotos/09/thumb-lado-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/09/thumb-lado-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/09/thumb-lado-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">O que era magro, mas tinha gordura abdominal alta</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="12" onclick="openCasoByKey('12')">
-            <span class="ec-entry__thumb"><img src="fotos/12/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/12/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/12/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">O que emagrecia na base do sacrifício e voltava tudo</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="14" onclick="openCasoByKey('14')">
-            <span class="ec-entry__thumb"><img src="fotos/14/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/14/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/14/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">O que achava que emagrecer era viver de salada e carne</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
         </li>
         <li class="ec-entry" data-reveal>
           <button class="ec-entry__btn" type="button" data-caso="15" onclick="openCasoByKey('15')">
-            <span class="ec-entry__thumb"><img src="fotos/15/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="ec-entry__thumb"><span class="t-card t-card-antes"><img src="fotos/15/thumb-frente-antes.webp" alt="" loading="lazy" decoding="async"></span><span class="t-card t-card-depois"><img src="fotos/15/thumb-frente-depois.webp" alt="" loading="lazy" decoding="async"></span></span>
             <span class="ec-entry__phrase">Os dois que fizeram juntos e um sustentou o outro</span>
             <span class="ec-entry__chev" aria-hidden="true">›</span>
           </button>
@@ -1820,72 +1754,14 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-/* =========================================================================
-   COMPARADOR DE MINIATURAS (temporario)
-   Monta a miniatura com as duas fotos (antes e depois) e, se a URL tiver
-   ?comparar=1, mostra a barrinha pra alternar entre as opcoes.
-   Sem o parametro, a pagina fica exatamente como o lead ve hoje.
-   Quando voce escolher, eu apago este bloco e travo a versao vencedora.
-   ========================================================================= */
+/* Quando as duas polaroids terminam de abrir, marca o caso como "pousou".
+   Isso desliga a animacao e devolve o hover/toque pro CSS normal. */
 (function(){
-  var comparando = /[?&]comparar=1/.test(location.search);
-
-  // 1) cada miniatura ganha a moldura do "antes". A moldura do "depois" so e
-  //    criada quando voce esta comparando, senao a pagina do lead baixaria
-  //    16 fotos escondidas de graca (~286 KB).
-  document.querySelectorAll('.ec-entry__thumb').forEach(function(thumb){
-    var img = thumb.querySelector('img');
-    if (!img || thumb.querySelector('.t-card')) return;
-
-    var cardA = document.createElement('span');
-    cardA.className = 't-card t-card-antes';
-    cardA.appendChild(img);
-    thumb.appendChild(cardA);
-
-    if (!comparando) return;
-
-    var cardD = document.createElement('span');
-    cardD.className = 't-card t-card-depois';
-    var imgD = document.createElement('img');
-    imgD.loading = 'lazy';          // sempre ANTES do src, senao ja comeca a baixar
-    imgD.decoding = 'async';
-    imgD.alt = '';
-    imgD.src = img.getAttribute('src').replace('-antes.webp', '-depois.webp');
-    cardD.appendChild(imgD);
-    thumb.appendChild(cardD);
-  });
-
-  // 2) variante ativa (padrao: a de hoje)
-  var b = document.body;
-  function set(v){
-    b.classList.remove('v-atual','v-a','v-b','v-c');
-    b.classList.add(v);
-    document.querySelectorAll('#seletor-miniatura button').forEach(function(x){
-      x.setAttribute('aria-pressed', String(x.dataset.v === v));
+  document.querySelectorAll('.ec-entry').forEach(function(en){
+    en.addEventListener('animationend', function(e){
+      if (e.animationName === 'leque-depois') en.classList.add('pousou');
     });
-    try { localStorage.setItem('variante-miniatura', v); } catch(e){}
-  }
-
-  if (!comparando) { set('v-atual'); return; }
-
-  // 3) barrinha de comparacao
-  b.classList.add('comparando');
-  var bar = document.createElement('div');
-  bar.id = 'seletor-miniatura';
-  bar.innerHTML =
-    '<b>Miniatura</b>' +
-    '<button data-v="v-atual">Atual</button>' +
-    '<button data-v="v-a">A &middot; Grande que vira</button>' +
-    '<button data-v="v-b">B &middot; Duas polaroids</button>' +
-    '<button data-v="v-c">C &middot; Só o depois</button>';
-  b.insertBefore(bar, b.firstChild);
-  bar.querySelectorAll('button').forEach(function(x){
-    x.addEventListener('click', function(){ set(x.dataset.v); });
   });
-
-  var salvo = 'v-atual';
-  try { salvo = localStorage.getItem('variante-miniatura') || 'v-atual'; } catch(e){}
-  set(salvo);
 })();
 </script>
 
