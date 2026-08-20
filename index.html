@@ -20,6 +20,139 @@
 <noscript>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..800&family=Source+Sans+3:wght@300..700&display=swap">
 </noscript>
+
+<!-- ===========================================================
+     COMPARADOR DE MINIATURAS (temporario, so pra decidir o visual)
+     A pagina normal continua igual. Pra comparar as opcoes, abra
+     a URL com  ?comparar=1  no fim. Quando bater o martelo, eu
+     apago este bloco e deixo so a versao escolhida.
+     =========================================================== -->
+<style id="variantes-miniatura">
+/* ---------- base comum ---------- */
+.ec-entry__thumb{
+  position: relative;
+  aspect-ratio: 3 / 4;
+  flex-shrink: 0;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  transform: none;
+  transition: width .35s cubic-bezier(.2,.7,.2,1);
+}
+.t-card{
+  position: absolute; inset: 0;
+  padding: 3px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(20,19,15,.14), 0 1px 2px rgba(20,19,15,.06);
+  transition: transform .4s cubic-bezier(.2,.7,.2,1),
+              box-shadow .35s cubic-bezier(.4,0,.2,1),
+              opacity .55s ease;
+}
+.t-card img{
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  border-radius: 2px;
+}
+
+/* ---------- ATUAL (o que o lead ve hoje) ---------- */
+body.v-atual .ec-entry__thumb{ width: 42px; }
+body.v-atual .t-card-antes { transform: rotate(-2.5deg); }
+body.v-atual .t-card-depois{ display: none; }
+body.v-atual .ec-entry__btn:hover .t-card-antes,
+body.v-atual .ec-entry__btn:focus-visible .t-card-antes{
+  transform: rotate(0deg) scale(1.06);
+  box-shadow: 0 6px 14px rgba(20,19,15,.18), 0 2px 4px rgba(20,19,15,.08);
+}
+
+/* ---------- A: polaroid grande que vira o depois ---------- */
+body.v-a .ec-entry__thumb{ width: 96px; }
+body.v-a .t-card{ transform: rotate(-2.5deg); }
+body.v-a .t-card-depois{ opacity: 0; animation: t-vira 7s ease-in-out infinite; }
+@keyframes t-vira{ 0%,40%{opacity:0} 55%,90%{opacity:1} 100%{opacity:0} }
+body.v-a .ec-entry:nth-child(3n+2) .t-card-depois{ animation-delay: -2.4s; }
+body.v-a .ec-entry:nth-child(3n+3) .t-card-depois{ animation-delay: -4.8s; }
+body.v-a .ec-entry__btn:hover .t-card,
+body.v-a .ec-entry__btn:focus-visible .t-card{
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 8px 18px rgba(20,19,15,.2), 0 2px 5px rgba(20,19,15,.09);
+}
+body.v-a .ec-entry__btn:hover .t-card-depois{ animation: none; opacity: 1; }
+
+/* ---------- B: duas polaroids, antes atras e depois na frente ---------- */
+body.v-b .ec-entry__thumb{ width: 118px; }
+body.v-b .t-card{ width: 74px; }
+body.v-b .t-card-antes{
+  left: 0; right: auto;
+  transform: rotate(-6deg) translateY(3px) scale(.92);
+  filter: saturate(.85);
+  z-index: 1;
+}
+body.v-b .t-card-depois{
+  left: auto; right: 0;
+  transform: rotate(3.5deg);
+  z-index: 2;
+}
+body.v-b .ec-entry__btn:hover .t-card-antes{
+  transform: rotate(-9deg) translateX(-5px) translateY(2px) scale(.94);
+}
+body.v-b .ec-entry__btn:hover .t-card-depois{
+  transform: rotate(2deg) translateX(4px) scale(1.04);
+  box-shadow: 0 8px 18px rgba(20,19,15,.2), 0 2px 5px rgba(20,19,15,.09);
+}
+
+/* ---------- C: polaroid grande so do depois ---------- */
+body.v-c .ec-entry__thumb{ width: 96px; }
+body.v-c .t-card-antes { display: none; }
+body.v-c .t-card-depois{ transform: rotate(-2.5deg); }
+body.v-c .ec-entry__btn:hover .t-card-depois,
+body.v-c .ec-entry__btn:focus-visible .t-card-depois{
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 8px 18px rgba(20,19,15,.2), 0 2px 5px rgba(20,19,15,.09);
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.v-a .t-card-depois{ animation: none; opacity: 0; }
+  body.v-a .ec-entry__btn:hover .t-card-depois{ opacity: 1; }
+}
+
+/* ---------- barra do comparador (so aparece com ?comparar=1) ---------- */
+#seletor-miniatura{
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(20,19,15,.12);
+  font-family: var(--font-body);
+  box-shadow: 0 2px 10px rgba(20,19,15,.06);
+}
+#seletor-miniatura b{
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: #6b6a63; font-weight: 700; margin-right: 4px;
+}
+#seletor-miniatura button{
+  font: inherit; font-size: 13px; font-weight: 600;
+  padding: 7px 13px; border-radius: 999px;
+  border: 1px solid rgba(20,19,15,.18);
+  background: #fff; color: #3a3934; cursor: pointer;
+  transition: all .18s ease;
+}
+#seletor-miniatura button:hover{ border-color: var(--color-brand-green); color: #5f7d16; }
+#seletor-miniatura button[aria-pressed="true"]{
+  background: var(--color-brand-green); border-color: var(--color-brand-green); color: #fff;
+}
+body.comparando{ padding-top: 56px; }
+@media (max-width: 640px){
+  #seletor-miniatura{ gap: 6px; padding: 8px 10px; }
+  #seletor-miniatura button{ padding: 6px 10px; font-size: 12px; }
+  #seletor-miniatura b{ width: 100%; margin-bottom: 2px; }
+  body.comparando{ padding-top: 84px; }
+  body.v-b .ec-entry__thumb{ width: 104px; }
+  body.v-b .t-card{ width: 66px; }
+}
+</style>
 <style>
   :root {
     --color-brand-green: #80A422;
@@ -1686,6 +1819,74 @@ document.addEventListener('keydown', (e) => {
     closeModal('caso');
   }
 });
+
+/* =========================================================================
+   COMPARADOR DE MINIATURAS (temporario)
+   Monta a miniatura com as duas fotos (antes e depois) e, se a URL tiver
+   ?comparar=1, mostra a barrinha pra alternar entre as opcoes.
+   Sem o parametro, a pagina fica exatamente como o lead ve hoje.
+   Quando voce escolher, eu apago este bloco e travo a versao vencedora.
+   ========================================================================= */
+(function(){
+  var comparando = /[?&]comparar=1/.test(location.search);
+
+  // 1) cada miniatura ganha a moldura do "antes". A moldura do "depois" so e
+  //    criada quando voce esta comparando, senao a pagina do lead baixaria
+  //    16 fotos escondidas de graca (~286 KB).
+  document.querySelectorAll('.ec-entry__thumb').forEach(function(thumb){
+    var img = thumb.querySelector('img');
+    if (!img || thumb.querySelector('.t-card')) return;
+
+    var cardA = document.createElement('span');
+    cardA.className = 't-card t-card-antes';
+    cardA.appendChild(img);
+    thumb.appendChild(cardA);
+
+    if (!comparando) return;
+
+    var cardD = document.createElement('span');
+    cardD.className = 't-card t-card-depois';
+    var imgD = document.createElement('img');
+    imgD.loading = 'lazy';          // sempre ANTES do src, senao ja comeca a baixar
+    imgD.decoding = 'async';
+    imgD.alt = '';
+    imgD.src = img.getAttribute('src').replace('-antes.webp', '-depois.webp');
+    cardD.appendChild(imgD);
+    thumb.appendChild(cardD);
+  });
+
+  // 2) variante ativa (padrao: a de hoje)
+  var b = document.body;
+  function set(v){
+    b.classList.remove('v-atual','v-a','v-b','v-c');
+    b.classList.add(v);
+    document.querySelectorAll('#seletor-miniatura button').forEach(function(x){
+      x.setAttribute('aria-pressed', String(x.dataset.v === v));
+    });
+    try { localStorage.setItem('variante-miniatura', v); } catch(e){}
+  }
+
+  if (!comparando) { set('v-atual'); return; }
+
+  // 3) barrinha de comparacao
+  b.classList.add('comparando');
+  var bar = document.createElement('div');
+  bar.id = 'seletor-miniatura';
+  bar.innerHTML =
+    '<b>Miniatura</b>' +
+    '<button data-v="v-atual">Atual</button>' +
+    '<button data-v="v-a">A &middot; Grande que vira</button>' +
+    '<button data-v="v-b">B &middot; Duas polaroids</button>' +
+    '<button data-v="v-c">C &middot; Só o depois</button>';
+  b.insertBefore(bar, b.firstChild);
+  bar.querySelectorAll('button').forEach(function(x){
+    x.addEventListener('click', function(){ set(x.dataset.v); });
+  });
+
+  var salvo = 'v-atual';
+  try { salvo = localStorage.getItem('variante-miniatura') || 'v-atual'; } catch(e){}
+  set(salvo);
+})();
 </script>
 
 </body>
