@@ -21,6 +21,137 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..800&family=Source+Sans+3:wght@300..700&display=swap">
 </noscript>
 
+<!-- ===========================================================
+     PROVA VISUAL NO TOPO (temporario, so pra decidir)
+     Sem parametro na URL a pagina fica como esta hoje.
+     Abra com  ?topo=1  pra ver as 3 opcoes e as 2 posicoes.
+     Quando bater o martelo, apago o resto e deixo a escolhida.
+     =========================================================== -->
+<style id="prova-topo">
+.ec-prova{ display: none; }
+body.p-a .ec-prova-a,
+body.p-b .ec-prova-b,
+body.p-c .ec-prova-c{ display: block; }
+
+/* onde a prova entra */
+.ec-prova{ margin: clamp(26px, 5vw, 40px) 0 clamp(4px, 1vw, 10px); }
+.ec-prova__selo{
+  font-family: var(--font-body);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: #6b6a63;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 14px;
+}
+.ec-prova__selo::before{
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--color-brand-green); flex-shrink: 0;
+}
+
+/* ---------- A: faixa que desliza ---------- */
+.ec-faixa{
+  position: relative;
+  overflow: hidden;
+  padding: 6px 0 10px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.ec-faixa__trilho{
+  display: flex; gap: 26px; width: max-content;
+  animation: faixa-anda 46s linear infinite;
+}
+.ec-faixa:hover .ec-faixa__trilho{ animation-play-state: paused; }
+@keyframes faixa-anda{ from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
+.ec-par{ display: flex; align-items: flex-start; flex-shrink: 0; }
+.ec-par img{
+  width: 78px; aspect-ratio: 3/4; object-fit: cover;
+  display: block; border-radius: 2px;
+}
+.ec-par__foto{
+  padding: 3px; background: #fff; border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(20,19,15,.14), 0 1px 2px rgba(20,19,15,.06);
+}
+.ec-par__foto--antes { transform: rotate(-5deg); filter: saturate(.85); z-index: 1; }
+.ec-par__foto--depois{ transform: rotate(3deg); margin-left: -16px; z-index: 2; position: relative; }
+
+/* ---------- B: um caso em destaque, com a barrinha ---------- */
+.ec-destaque{ max-width: 300px; }
+.ec-destaque .ba-slider{ border-radius: 8px; }
+.ec-destaque__pe{
+  font-family: var(--font-body);
+  font-size: 13px; color: #6b6a63;
+  margin-top: 10px; font-style: italic;
+}
+
+/* ---------- C: mosaico calmo ---------- */
+.ec-mosaico{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 420px;
+}
+.ec-mosaico__cel{ position: relative; }
+.ec-mosaico__cel img{
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  display: block; border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(20,19,15,.12);
+}
+.ec-mosaico__cel span{
+  position: absolute; left: 5px; bottom: 5px;
+  font-family: var(--font-body);
+  font-size: 9px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #fff; background: rgba(20,19,15,.55);
+  padding: 2px 5px; border-radius: 3px;
+  backdrop-filter: blur(3px);
+}
+
+@media (max-width: 640px){
+  .ec-par img{ width: 68px; }
+  .ec-destaque{ max-width: 250px; }
+  .ec-mosaico{ gap: 7px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .ec-faixa__trilho{ animation: none; }
+}
+
+/* ---------- barra de escolha (so com ?topo=1) ---------- */
+#seletor-topo{
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
+  padding: 9px 13px;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(20,19,15,.12);
+  font-family: var(--font-body);
+  box-shadow: 0 2px 10px rgba(20,19,15,.06);
+}
+#seletor-topo b{
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: #6b6a63; font-weight: 700;
+}
+#seletor-topo button{
+  font: inherit; font-size: 12.5px; font-weight: 600;
+  padding: 6px 11px; border-radius: 999px;
+  border: 1px solid rgba(20,19,15,.18);
+  background: #fff; color: #3a3934; cursor: pointer;
+  transition: all .18s ease;
+}
+#seletor-topo button:hover{ border-color: var(--color-brand-green); color: #5f7d16; }
+#seletor-topo button[aria-pressed="true"]{
+  background: var(--color-brand-green); border-color: var(--color-brand-green); color: #fff;
+}
+#seletor-topo .sep{ width: 1px; height: 20px; background: rgba(20,19,15,.14); margin: 0 4px; }
+body.escolhendo-topo{ padding-top: 60px; }
+@media (max-width: 640px){
+  #seletor-topo{ gap: 5px; padding: 7px 9px; }
+  #seletor-topo button{ padding: 5px 9px; font-size: 11.5px; }
+  #seletor-topo b{ width: 100%; margin-bottom: 1px; }
+  #seletor-topo .sep{ display: none; }
+  body.escolhendo-topo{ padding-top: 96px; }
+}
+</style>
+
 <style id="miniatura-polaroids">
 /* ===========================================================
    MINIATURA DA LISTA: duas polaroids (antes atras, depois na frente)
@@ -1762,6 +1893,159 @@ document.addEventListener('keydown', (e) => {
       if (e.animationName === 'leque-depois') en.classList.add('pousou');
     });
   });
+})();
+
+/* =========================================================================
+   PROVA VISUAL NO TOPO (temporario, so pra decidir)
+   Sem ?topo=1 na URL, nada disso e criado e a pagina fica como esta hoje.
+   ========================================================================= */
+(function(){
+  if (!/[?&]topo=1/.test(location.search)) return;
+
+  var b = document.body;
+  b.classList.add('escolhendo-topo');
+
+  // pares (antes, depois) tirados das proprias miniaturas da lista
+  var pares = [].slice.call(document.querySelectorAll('.ec-entry__thumb')).map(function(t){
+    return {
+      a: t.querySelector('.t-card-antes img').getAttribute('src'),
+      d: t.querySelector('.t-card-depois img').getAttribute('src')
+    };
+  });
+
+  function selo(txt){
+    var s = document.createElement('p');
+    s.className = 'ec-prova__selo';
+    s.textContent = txt;
+    return s;
+  }
+  function bloco(classe){
+    var d = document.createElement('div');
+    d.className = 'ec-prova ' + classe;
+    return d;
+  }
+
+  /* ---------- A: faixa que desliza ---------- */
+  var A = bloco('ec-prova-a');
+  A.appendChild(selo('Quinze pessoas autorizaram'));
+  var faixa = document.createElement('div');
+  faixa.className = 'ec-faixa';
+  var trilho = document.createElement('div');
+  trilho.className = 'ec-faixa__trilho';
+  // duas voltas iguais, pra emendar sem salto
+  [0,1].forEach(function(){
+    pares.forEach(function(p){
+      var par = document.createElement('div');
+      par.className = 'ec-par';
+      par.innerHTML =
+        '<span class="ec-par__foto ec-par__foto--antes"><img src="'+p.a+'" alt="" decoding="async"></span>' +
+        '<span class="ec-par__foto ec-par__foto--depois"><img src="'+p.d+'" alt="" decoding="async"></span>';
+      trilho.appendChild(par);
+    });
+  });
+  faixa.appendChild(trilho);
+  A.appendChild(faixa);
+
+  /* ---------- B: um caso em destaque, com a barrinha ---------- */
+  var B = bloco('ec-prova-b');
+  B.appendChild(selo('Um dos casos'));
+  var dest = document.createElement('div');
+  dest.className = 'ec-destaque';
+  dest.appendChild(buildSlider('fotos/07/destaque-frente-antes.webp',
+                               'fotos/07/destaque-frente-depois.webp', true));
+  var pe = document.createElement('p');
+  pe.className = 'ec-destaque__pe';
+  pe.textContent = 'Arraste a barrinha. Tem mais quatorze histórias abaixo.';
+  dest.appendChild(pe);
+  B.appendChild(dest);
+
+  /* ---------- C: mosaico calmo ---------- */
+  var C = bloco('ec-prova-c');
+  C.appendChild(selo('Quinze pessoas autorizaram'));
+  var mos = document.createElement('div');
+  mos.className = 'ec-mosaico';
+  // fotos proprias do mosaico (400px), porque a miniatura de 220px ficaria borrada aqui
+  var tres = [
+    { a: 'fotos/01/mos-frente-antes.webp', d: 'fotos/01/mos-frente-depois.webp' },
+    { a: 'fotos/03/mos-frente-antes.webp', d: 'fotos/03/mos-frente-depois.webp' },
+    { a: 'fotos/04/mos-lado-antes.webp',   d: 'fotos/04/mos-lado-depois.webp'   }
+  ];
+  tres.forEach(function(p, i){
+    var c = document.createElement('div');
+    c.className = 'ec-mosaico__cel';
+    c.innerHTML = '<img src="'+p.a+'" alt="" decoding="async">' + (i===0 ? '<span>antes</span>' : '');
+    mos.appendChild(c);
+  });
+  tres.forEach(function(p, i){
+    var c = document.createElement('div');
+    c.className = 'ec-mosaico__cel';
+    c.innerHTML = '<img src="'+p.d+'" alt="" decoding="async">' + (i===0 ? '<span>depois</span>' : '');
+    mos.appendChild(c);
+  });
+  C.appendChild(mos);
+
+  /* ---------- posiciona ---------- */
+  var tituloAviso = document.querySelector('.ec-aviso__title');
+  var textoOriginal = tituloAviso ? tituloAviso.textContent : '';
+  var alvoTopo  = document.querySelector('.ec-hero__scrollhint');
+  var secAviso  = document.querySelector('.ec-aviso');
+
+  function posiciona(onde){
+    [A,B,C].forEach(function(el){
+      if (el.parentNode) el.parentNode.removeChild(el);
+    });
+    if (onde === 'topo'){
+      [A,B,C].forEach(function(el){ alvoTopo.parentNode.insertBefore(el, alvoTopo); });
+      // a frase do aviso nao pode mais dizer "antes de voce ver as fotos"
+      if (tituloAviso) tituloAviso.textContent = 'Antes de seguir, leia.';
+    } else {
+      [A,B,C].forEach(function(el){ secAviso.parentNode.insertBefore(el, secAviso.nextSibling); });
+      if (tituloAviso) tituloAviso.textContent = textoOriginal;
+    }
+    try{ localStorage.setItem('prova-onde', onde); }catch(e){}
+  }
+
+  function trata(v){
+    b.classList.remove('p-a','p-b','p-c');
+    b.classList.add(v);
+    try{ localStorage.setItem('prova-trata', v); }catch(e){}
+  }
+
+  function marca(){
+    document.querySelectorAll('#seletor-topo button').forEach(function(x){
+      var on = x.dataset.t ? b.classList.contains(x.dataset.t)
+                           : (localStorage.getItem('prova-onde')||'topo') === x.dataset.o;
+      x.setAttribute('aria-pressed', String(on));
+    });
+  }
+
+  /* ---------- barra ---------- */
+  var bar = document.createElement('div');
+  bar.id = 'seletor-topo';
+  bar.innerHTML =
+    '<b>Prova</b>' +
+    '<button data-t="p-a">A · Faixa que desliza</button>' +
+    '<button data-t="p-b">B · Caso em destaque</button>' +
+    '<button data-t="p-c">C · Mosaico</button>' +
+    '<span class="sep"></span>' +
+    '<b>Onde</b>' +
+    '<button data-o="topo">No topo</button>' +
+    '<button data-o="depois">Depois do aviso</button>';
+  b.insertBefore(bar, b.firstChild);
+
+  bar.querySelectorAll('button').forEach(function(x){
+    x.addEventListener('click', function(){
+      if (x.dataset.t) trata(x.dataset.t); else posiciona(x.dataset.o);
+      marca();
+    });
+  });
+
+  var t = 'p-a', o = 'topo';
+  try{
+    t = localStorage.getItem('prova-trata') || 'p-a';
+    o = localStorage.getItem('prova-onde')  || 'topo';
+  }catch(e){}
+  trata(t); posiciona(o); marca();
 })();
 </script>
 
