@@ -567,66 +567,33 @@
   }
 
   /* =========================================================
-     TEXTO DA HISTORIA: 3 jeitos de apresentar (temporario).
-     Sem ?texto=1 na URL fica como esta hoje.
+     TEXTO DA HISTORIA
+     A primeira frase de cada bloco puxa a leitura: corpo maior,
+     na fonte do titulo. O resto do bloco segue normal.
      ========================================================= */
   .caso-block p + p { margin-top: 11px; }
-
-  /* A: o fecho de cada bloco ganha destaque */
-  .caso-fecho{
-    font-family: var(--font-display) !important;
-    font-size: 17px !important;
-    font-weight: 500 !important;
-    line-height: 1.45 !important;
-    color: var(--color-stone-900) !important;
-    margin-top: 13px !important;
-  }
-
-  /* B: texto respirado, paragrafos curtos */
-  body.t-b .caso-block p{ line-height: 1.72; }
-  body.t-b .caso-block p + p{ margin-top: 13px; }
-
-  /* C: a abertura de cada bloco puxa a leitura */
   .caso-abre{
-    font-family: var(--font-display) !important;
-    font-size: 17.5px !important;
-    font-weight: 500 !important;
-    line-height: 1.42 !important;
-    color: var(--color-stone-900) !important;
-    margin-bottom: 11px !important;
+    font-family: var(--font-display);
+    font-size: 17.5px;
+    font-weight: 500;
+    line-height: 1.42;
+    color: var(--color-stone-900);
+    margin-bottom: 11px;
+  }
+  @media (max-width: 640px){
+    .caso-abre{ font-size: 16.5px; }
   }
 
-  /* barra de escolha */
-  #seletor-texto{
-    position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-    display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
-    padding: 9px 13px;
-    background: rgba(255,255,255,.96);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(20,19,15,.12);
-    font-family: var(--font-body);
-    box-shadow: 0 2px 10px rgba(20,19,15,.06);
+  /* aspas na fala do paciente */
+  .caso-quote::before,
+  .caso-quote::after{
+    color: var(--color-brand-green);
+    font-weight: 700;
+    font-style: normal;
   }
-  #seletor-texto b{
-    font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
-    color: #6b6a63; font-weight: 700;
-  }
-  #seletor-texto button{
-    font: inherit; font-size: 12.5px; font-weight: 600;
-    padding: 6px 11px; border-radius: 999px;
-    border: 1px solid rgba(20,19,15,.18);
-    background: #fff; color: #3a3934; cursor: pointer;
-  }
-  #seletor-texto button[aria-pressed="true"]{
-    background: var(--color-brand-green); border-color: var(--color-brand-green); color: #fff;
-  }
-  body.escolhendo-texto{ padding-top: 52px; }
-  body.escolhendo-texto .modal-backdrop{ top: 52px; }
-  @media (max-width: 640px){
-    #seletor-texto b{ width: 100%; margin-bottom: 1px; }
-    body.escolhendo-texto{ padding-top: 74px; }
-    body.escolhendo-texto .modal-backdrop{ top: 74px; }
-  }
+  .caso-quote::before{ content: "“"; margin-right: 1px; }
+  .caso-quote::after { content: "”"; margin-left: 1px; }
+
   /* Faixa antes dos ângulos extras */
   .caso-more-label {
     text-align: center;
@@ -1817,30 +1784,14 @@ function attachSlider(slider) {
 }
 
 /* ---------- Abre um caso ---------- */
-/* Quebra o bloco em frases e monta do jeito escolhido.
-   Sem escolha ativa, devolve o paragrafo unico de sempre. */
+/* Quebra o bloco em frases. A primeira vira a abertura em destaque
+   e o resto segue como paragrafo normal. */
 function frasesDe(t) {
   return (t.match(/[^.!?]+[.!?]*/g) || [t]).map(f => f.trim()).filter(Boolean);
 }
 function montaTexto(t) {
-  const modo = (document.body.className.match(/\bt-([abc])\b/) || [])[1];
-  if (!modo) return `<p>${t}</p>`;
   const fs = frasesDe(t);
-  if (fs.length < 2) return `<p>${t}</p>`;
-
-  if (modo === 'a') {                     // fecho em destaque
-    return `<p>${fs.slice(0, -1).join(' ')}</p>` +
-           `<p class="caso-fecho">${fs[fs.length - 1]}</p>`;
-  }
-  if (modo === 'b') {                     // texto respirado
-    let out = '', buf = [];
-    fs.forEach((f, i) => {
-      buf.push(f);
-      if (buf.length === 2 || i === fs.length - 1) { out += `<p>${buf.join(' ')}</p>`; buf = []; }
-    });
-    return out;
-  }
-  // modo c: abertura forte
+  if (fs.length < 2) return `<p class="caso-abre">${t}</p>`;
   return `<p class="caso-abre">${fs[0]}</p><p>${fs.slice(1).join(' ')}</p>`;
 }
 
@@ -1982,46 +1933,6 @@ document.addEventListener('keydown', (e) => {
   alvo.parentNode.insertBefore(faixa, alvo);
 })();
 
-/* =========================================================================
-   TEXTO DA HISTORIA: comparador temporario (?texto=1)
-   Sem o parametro nada disso existe e o popup fica como esta hoje.
-   ========================================================================= */
-(function(){
-  if (!/[?&]texto=1/.test(location.search)) return;
-  var b = document.body;
-  b.classList.add('escolhendo-texto');
-
-  var bar = document.createElement('div');
-  bar.id = 'seletor-texto';
-  bar.innerHTML =
-    '<b>Texto da história</b>' +
-    '<button data-m="">Atual</button>' +
-    '<button data-m="t-a">A · Fecho em destaque</button>' +
-    '<button data-m="t-b">B · Texto respirado</button>' +
-    '<button data-m="t-c">C · Abertura forte</button>';
-  b.insertBefore(bar, b.firstChild);
-
-  function set(m){
-    b.classList.remove('t-a','t-b','t-c');
-    if (m) b.classList.add(m);
-    bar.querySelectorAll('button').forEach(function(x){
-      x.setAttribute('aria-pressed', String(x.dataset.m === m));
-    });
-    try{ localStorage.setItem('modo-texto', m); }catch(e){}
-    // se tem caso aberto, remonta na hora pra ver a diferenca
-    var aberto = document.getElementById('modal-caso');
-    if (aberto && aberto.classList.contains('open') && window.__casoAberto) {
-      openCaso(window.__casoAberto);
-    }
-  }
-  bar.querySelectorAll('button').forEach(function(x){
-    x.addEventListener('click', function(){ set(x.dataset.m); });
-  });
-
-  var salvo = 't-a';
-  try{ salvo = localStorage.getItem('modo-texto'); if (salvo === null) salvo = 't-a'; }catch(e){}
-  set(salvo);
-})();
 </script>
 
 </body>
