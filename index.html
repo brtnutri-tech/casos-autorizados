@@ -842,15 +842,6 @@
   border-left: 2px solid var(--color-brand-green);
   padding: 8px 0 8px 28px;
 }
-.ec-aviso__eyebrow{
-  font-family: var(--font-body);
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-brand-green-700);
-  margin: 0 0 14px;
-  font-weight: 600;
-}
 .ec-aviso__title{
   font-family: var(--font-display);
   font-weight: 500;
@@ -860,15 +851,49 @@
   color: var(--color-stone-900);
   margin: 0 0 24px;
 }
-.ec-aviso__text{
+.ec-aviso__lista{
+  list-style: none;
+  counter-reset: aviso;
+  margin: 0;
+  padding: 0;
+}
+.ec-aviso__lista li{
+  counter-increment: aviso;
+  position: relative;
+  padding-left: 38px;
   font-family: var(--font-body);
   font-size: clamp(16px, 1.55vw, 18px);
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--color-stone-700);
-  margin: 0 0 14px;
-  font-weight: 400;
+  margin-bottom: 18px;
 }
-.ec-aviso__text:last-child{ margin-bottom: 0; }
+.ec-aviso__lista li:last-child{ margin-bottom: 0; }
+.ec-aviso__lista li::before{
+  content: counter(aviso);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-brand-green);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ec-aviso__lista b{
+  font-weight: 600;
+  color: var(--color-stone-900);
+}
+
+@media (max-width: 600px){
+  .ec-aviso__lista li{ padding-left: 33px; margin-bottom: 16px; }
+  .ec-aviso__lista li::before{ width: 22px; height: 22px; font-size: 12px; }
+}
 
 @media (max-width: 600px){
   .ec-aviso__inner{ padding-left: 20px; }
@@ -1194,14 +1219,13 @@
 
 <section class="ec-aviso" aria-label="Aviso antes da leitura" data-reveal>
   <div class="ec-aviso__inner">
-    <p class="ec-aviso__eyebrow">Antes de continuar</p>
-    <h2 class="ec-aviso__title">Antes de seguir, leia.</h2>
-    <p class="ec-aviso__text">
-      Cada paciente aqui tem uma história diferente da sua. Não se compare com nenhum deles, porque a sua trajetória vai ser única também. A referência que importa é onde você estava ontem, não onde os outros chegaram. Ninguém mudou do dia pra noite, e nenhum resultado veio sem tempo, processo, acerto e erro. Não tem milagre nem atalho.
-    </p>
-    <p class="ec-aviso__text">
-      A foto mostra só o que se vê por fora. Mas o que mudou em cada um foi o sono, o intestino, a disposição, a paz com a comida. O resultado de verdade está em coisas que a câmera não pega.
-    </p>
+    <h2 class="ec-aviso__title">Antes de seguir, saiba disso:</h2>
+    <ol class="ec-aviso__lista">
+      <li><b>Não se compare com ninguém aqui.</b> Cada história é diferente da sua, e a sua vai ser única também.</li>
+      <li><b>A referência que importa é onde você estava ontem</b>, não onde os outros chegaram.</li>
+      <li><b>Não tem milagre nem atalho.</b> Ninguém mudou do dia pra noite. Todo resultado aqui levou tempo, processo, acerto e erro.</li>
+      <li><b>A foto mostra só o que se vê por fora.</b> O que mudou de verdade foi o sono, o intestino, a disposição, a paz com a comida. Isso a câmera não pega.</li>
+    </ol>
   </div>
 </section>
 
