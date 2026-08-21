@@ -565,6 +565,68 @@
     line-height: 1.6;
     color: var(--color-stone-700);
   }
+
+  /* =========================================================
+     TEXTO DA HISTORIA: 3 jeitos de apresentar (temporario).
+     Sem ?texto=1 na URL fica como esta hoje.
+     ========================================================= */
+  .caso-block p + p { margin-top: 11px; }
+
+  /* A: o fecho de cada bloco ganha destaque */
+  .caso-fecho{
+    font-family: var(--font-display) !important;
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    line-height: 1.45 !important;
+    color: var(--color-stone-900) !important;
+    margin-top: 13px !important;
+  }
+
+  /* B: texto respirado, paragrafos curtos */
+  body.t-b .caso-block p{ line-height: 1.72; }
+  body.t-b .caso-block p + p{ margin-top: 13px; }
+
+  /* C: a abertura de cada bloco puxa a leitura */
+  .caso-abre{
+    font-family: var(--font-display) !important;
+    font-size: 17.5px !important;
+    font-weight: 500 !important;
+    line-height: 1.42 !important;
+    color: var(--color-stone-900) !important;
+    margin-bottom: 11px !important;
+  }
+
+  /* barra de escolha */
+  #seletor-texto{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
+    padding: 9px 13px;
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(20,19,15,.12);
+    font-family: var(--font-body);
+    box-shadow: 0 2px 10px rgba(20,19,15,.06);
+  }
+  #seletor-texto b{
+    font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: #6b6a63; font-weight: 700;
+  }
+  #seletor-texto button{
+    font: inherit; font-size: 12.5px; font-weight: 600;
+    padding: 6px 11px; border-radius: 999px;
+    border: 1px solid rgba(20,19,15,.18);
+    background: #fff; color: #3a3934; cursor: pointer;
+  }
+  #seletor-texto button[aria-pressed="true"]{
+    background: var(--color-brand-green); border-color: var(--color-brand-green); color: #fff;
+  }
+  body.escolhendo-texto{ padding-top: 52px; }
+  body.escolhendo-texto .modal-backdrop{ top: 52px; }
+  @media (max-width: 640px){
+    #seletor-texto b{ width: 100%; margin-bottom: 1px; }
+    body.escolhendo-texto{ padding-top: 74px; }
+    body.escolhendo-texto .modal-backdrop{ top: 74px; }
+  }
   /* Faixa antes dos ângulos extras */
   .caso-more-label {
     text-align: center;
@@ -931,6 +993,42 @@
   color: var(--color-stone-500);
   margin: 0 0 28px;
 }
+/* Botao no meio da lista, entre Mulheres e Homens. De propositio mais
+   discreto que o do rodape (contorno em vez de preenchido), pra nao
+   cortar a leitura de quem ainda esta percorrendo os casos. */
+.ec-meio{
+  display: flex;
+  justify-content: center;
+  margin: clamp(30px, 6vw, 46px) 0 clamp(6px, 1.5vw, 12px);
+}
+.ec-meio__cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(128,164,34,.55);
+  background: transparent;
+  color: #5f7d16;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .25s cubic-bezier(.4,0,.2,1),
+              color .25s cubic-bezier(.4,0,.2,1),
+              border-color .25s cubic-bezier(.4,0,.2,1),
+              transform .25s cubic-bezier(.2,.7,.2,1);
+}
+.ec-meio__cta:hover,
+.ec-meio__cta:focus-visible{
+  background: var(--color-brand-green);
+  border-color: var(--color-brand-green);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.ec-meio__cta:active{ transform: translateY(0); }
+.ec-meio__cta svg{ display: block; }
+
 .ec-foot__cta{
   display: inline-flex;
   align-items: center;
@@ -1106,7 +1204,7 @@
   <div class="ec-hero__inner">
     <div class="ec-hero__eyebrow">
       <span class="ec-hero__dot" aria-hidden="true"></span>
-      <span class="ec-hero__eyebrow-text">Histórias reais, pessoais reais do acompanhamento</span>
+      <span class="ec-hero__eyebrow-text">Histórias reais, pessoas reais</span>
     </div>
 
     <h1 class="ec-hero__title">
@@ -1222,6 +1320,13 @@
         </li>
       </ol>
     </article>
+
+    <div class="ec-meio" data-reveal>
+      <a class="ec-meio__cta" href="https://api.whatsapp.com/send/?phone=5564981786708" target="_blank" rel="noopener noreferrer">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.9-2-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.5 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.8 0-3.4-.5-4.8-1.4l-.3-.2-3.4 1 .9-3.3-.2-.4C3.3 14.7 2.8 13.4 2.8 12c0-5.1 4.1-9.2 9.2-9.2s9.2 4.1 9.2 9.2-4.1 9.2-9.2 9.2z"/></svg>
+        Voltar pro WhatsApp
+      </a>
+    </div>
 
     <div class="ec-group__divider" data-reveal aria-hidden="true">
       <span class="line"></span>
@@ -1712,7 +1817,35 @@ function attachSlider(slider) {
 }
 
 /* ---------- Abre um caso ---------- */
+/* Quebra o bloco em frases e monta do jeito escolhido.
+   Sem escolha ativa, devolve o paragrafo unico de sempre. */
+function frasesDe(t) {
+  return (t.match(/[^.!?]+[.!?]*/g) || [t]).map(f => f.trim()).filter(Boolean);
+}
+function montaTexto(t) {
+  const modo = (document.body.className.match(/\bt-([abc])\b/) || [])[1];
+  if (!modo) return `<p>${t}</p>`;
+  const fs = frasesDe(t);
+  if (fs.length < 2) return `<p>${t}</p>`;
+
+  if (modo === 'a') {                     // fecho em destaque
+    return `<p>${fs.slice(0, -1).join(' ')}</p>` +
+           `<p class="caso-fecho">${fs[fs.length - 1]}</p>`;
+  }
+  if (modo === 'b') {                     // texto respirado
+    let out = '', buf = [];
+    fs.forEach((f, i) => {
+      buf.push(f);
+      if (buf.length === 2 || i === fs.length - 1) { out += `<p>${buf.join(' ')}</p>`; buf = []; }
+    });
+    return out;
+  }
+  // modo c: abertura forte
+  return `<p class="caso-abre">${fs[0]}</p><p>${fs.slice(1).join(' ')}</p>`;
+}
+
 function openCaso(c) {
+  window.__casoAberto = c;
   const body = document.getElementById('caso-body');
   body.innerHTML = '';
 
@@ -1725,7 +1858,7 @@ function openCaso(c) {
   let html = '';
   if (c.q) html += `<p class="caso-quote">${c.q}</p>`;
   (c.bl || []).forEach((b) => {
-    html += `<div class="caso-block"><div class="caso-block-title">${b[0]}</div><p>${b[1]}</p></div>`;
+    html += `<div class="caso-block"><div class="caso-block-title">${b[0]}</div>${montaTexto(b[1])}</div>`;
   });
   text.innerHTML = html;
   body.appendChild(text);
@@ -1847,6 +1980,47 @@ document.addEventListener('keydown', (e) => {
 
   faixa.appendChild(trilho);
   alvo.parentNode.insertBefore(faixa, alvo);
+})();
+
+/* =========================================================================
+   TEXTO DA HISTORIA: comparador temporario (?texto=1)
+   Sem o parametro nada disso existe e o popup fica como esta hoje.
+   ========================================================================= */
+(function(){
+  if (!/[?&]texto=1/.test(location.search)) return;
+  var b = document.body;
+  b.classList.add('escolhendo-texto');
+
+  var bar = document.createElement('div');
+  bar.id = 'seletor-texto';
+  bar.innerHTML =
+    '<b>Texto da história</b>' +
+    '<button data-m="">Atual</button>' +
+    '<button data-m="t-a">A · Fecho em destaque</button>' +
+    '<button data-m="t-b">B · Texto respirado</button>' +
+    '<button data-m="t-c">C · Abertura forte</button>';
+  b.insertBefore(bar, b.firstChild);
+
+  function set(m){
+    b.classList.remove('t-a','t-b','t-c');
+    if (m) b.classList.add(m);
+    bar.querySelectorAll('button').forEach(function(x){
+      x.setAttribute('aria-pressed', String(x.dataset.m === m));
+    });
+    try{ localStorage.setItem('modo-texto', m); }catch(e){}
+    // se tem caso aberto, remonta na hora pra ver a diferenca
+    var aberto = document.getElementById('modal-caso');
+    if (aberto && aberto.classList.contains('open') && window.__casoAberto) {
+      openCaso(window.__casoAberto);
+    }
+  }
+  bar.querySelectorAll('button').forEach(function(x){
+    x.addEventListener('click', function(){ set(x.dataset.m); });
+  });
+
+  var salvo = 't-a';
+  try{ salvo = localStorage.getItem('modo-texto'); if (salvo === null) salvo = 't-a'; }catch(e){}
+  set(salvo);
 })();
 </script>
 
